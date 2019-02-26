@@ -1,6 +1,5 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.directions;
 
-import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -29,6 +28,19 @@ public class KeyboardListener implements KeyboardHandler {
 
         keyboard.addEventListener(keyboardRightArrow);
 
+        KeyboardEvent keyboardZbuttonPress = new KeyboardEvent();
+        keyboardZbuttonPress.setKey(KeyboardEvent.KEY_Z);
+        keyboardZbuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(keyboardZbuttonPress);
+
+        KeyboardEvent keyboardZbuttonRelease = new KeyboardEvent();
+        keyboardZbuttonRelease.setKey(KeyboardEvent.KEY_Z);
+        keyboardZbuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardZbuttonRelease);
+
+
     }
 
 
@@ -42,11 +54,17 @@ public class KeyboardListener implements KeyboardHandler {
             case KeyboardEvent.KEY_RIGHT:
                 game.setDirections(Directions.RIGHT);
                 break;
+            case KeyboardEvent.KEY_Z:
+                game.punch();
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_Z:
+                game.resetPunch();
+        }
     }
 }
