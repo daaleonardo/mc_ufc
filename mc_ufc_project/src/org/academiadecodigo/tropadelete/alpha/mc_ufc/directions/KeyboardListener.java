@@ -11,6 +11,7 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.Game;
 public class KeyboardListener implements KeyboardHandler {
 
     private Game game;
+    private Keyboard keyboard;
 
     public KeyboardListener(Game game) {
         this.game = game;
@@ -18,16 +19,35 @@ public class KeyboardListener implements KeyboardHandler {
         Keyboard keyboard = new Keyboard(this);
 
         KeyboardEvent keyboardLeftArrow = new KeyboardEvent();
+
         keyboardLeftArrow.setKey(KeyboardEvent.KEY_LEFT);
+
         keyboardLeftArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         keyboard.addEventListener(keyboardLeftArrow);
 
+
+
+
         KeyboardEvent keyboardRightArrow = new KeyboardEvent();
+
         keyboardRightArrow.setKey(KeyboardEvent.KEY_RIGHT);
+
         keyboardRightArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         keyboard.addEventListener(keyboardRightArrow);
+
+    }
+
+    public void Left(){
+
+        KeyboardEvent keyboardLeft = new KeyboardEvent();
+
+       keyboardLeft.setKey(KeyboardEvent.KEY_LEFT);
+
+        keyboardLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(keyboardLeft);
 
     }
 
@@ -42,6 +62,7 @@ public class KeyboardListener implements KeyboardHandler {
             case KeyboardEvent.KEY_RIGHT:
                 game.setDirections(Directions.RIGHT);
                 break;
+               // case KeyboardEvent.KEY_0:
         }
     }
 

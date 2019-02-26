@@ -16,6 +16,7 @@ public class Main {
            Thread.sleep(30);
            game.move();
 
+
            } catch (InterruptedException e){
                e.printStackTrace();
            }

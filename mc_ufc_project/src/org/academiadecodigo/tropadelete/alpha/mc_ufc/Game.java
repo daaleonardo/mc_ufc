@@ -20,9 +20,9 @@ public class Game {
         picture.translate(-400, -1070);
         picture.draw();*/
         shape = new Rectangle(30, 310, 10, 300);
-        shape.fill();
+        //shape.fill();
         this.directions = Directions.NODIRECTION;
-
+        rectangle.grow(10,10);
     }
 
     public void start() {
