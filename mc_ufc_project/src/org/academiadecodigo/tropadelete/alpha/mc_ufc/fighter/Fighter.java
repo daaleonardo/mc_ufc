@@ -37,4 +37,8 @@ public class Fighter {
 
     }
 
+    public void movement(){
+
+    }
+
 }

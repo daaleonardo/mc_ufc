@@ -1,34 +1,52 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
+
 
 public class Game {
 
-    private Fighter fighter;
-    private Fighter fighter1;
+    private Rectangle rectangle;
+    private Rectangle shape;
+    private Directions directions;
+    private Picture picture;
 
-    public Game(Fighter fighter, Fighter fighter1){
+    public Game() {
+        rectangle = new Rectangle(10, 10, 1200, 600);
+        rectangle.draw();
+        /*picture = new Picture(5, 5, "Resources/mask.png");
+        picture.grow(-800, -1100);
+        picture.translate(-400, -1070);
+        picture.draw();*/
+        shape = new Rectangle(30, 310, 10, 300);
+        shape.fill();
+        this.directions = Directions.NODIRECTION;
 
     }
 
     public void start() {
 
-        while (!fighter.isDead() || !fighter1.isDead()) {
+        //rectangle.draw();
 
-            fighter.hit(fighter1);
-            System.out.println("Player Two Health: " + fighter1.getHealth());
-            if (fighter1.isDead()) {
-                System.out.println("Player One Wins");
-                break;
-            }
 
-            fighter1.hit(fighter);
-            System.out.println("Player One Health; " + fighter.getHealth());
-            if (fighter.isDead()) {
-                System.out.println("Player Two Wins.");
-                break;
-            }
-        }
     }
 
+    public void move() {
+
+        switch (directions) {
+            case RIGHT:
+                shape.translate(10, 0);
+                break;
+            case LEFT:
+                shape.translate(-10, 0);
+                break;
+        }
+
+        directions = Directions.NODIRECTION;
+    }
+
+    public void setDirections(Directions direction) {
+        this.directions = direction;
+    }
 }
