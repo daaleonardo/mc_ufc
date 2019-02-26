@@ -1,6 +1,5 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.directions;
 
-import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -11,13 +10,13 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.Game;
 public class KeyboardListener implements KeyboardHandler {
 
     private Game game;
-    private Keyboard keyboard;
 
     public KeyboardListener(Game game) {
         this.game = game;
 
         Keyboard keyboard = new Keyboard(this);
 
+        //MOVE LEFT
         KeyboardEvent keyboardLeftArrow = new KeyboardEvent();
 
         keyboardLeftArrow.setKey(KeyboardEvent.KEY_LEFT);
@@ -27,8 +26,7 @@ public class KeyboardListener implements KeyboardHandler {
         keyboard.addEventListener(keyboardLeftArrow);
 
 
-
-
+        //MOVE RIGHT
         KeyboardEvent keyboardRightArrow = new KeyboardEvent();
 
         keyboardRightArrow.setKey(KeyboardEvent.KEY_RIGHT);
@@ -37,17 +35,35 @@ public class KeyboardListener implements KeyboardHandler {
 
         keyboard.addEventListener(keyboardRightArrow);
 
-    }
 
-    public void Left(){
+        //PUNCH
+        KeyboardEvent keyboardZbuttonPress = new KeyboardEvent();
 
-        KeyboardEvent keyboardLeft = new KeyboardEvent();
+        keyboardZbuttonPress.setKey(KeyboardEvent.KEY_Z);
 
-       keyboardLeft.setKey(KeyboardEvent.KEY_LEFT);
+        keyboardZbuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        keyboardLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(keyboardZbuttonPress);
 
-        keyboard.addEventListener(keyboardLeft);
+
+        //RESET PUNCH
+        KeyboardEvent keyboardZbuttonRelease = new KeyboardEvent();
+
+        keyboardZbuttonRelease.setKey(KeyboardEvent.KEY_Z);
+
+        keyboardZbuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardZbuttonRelease);
+
+
+        //MOVE UP
+        KeyboardEvent keyboardUpArrowPress = new KeyboardEvent();
+
+        keyboardUpArrowPress.setKey(KeyboardEvent.KEY_UP);
+
+        keyboardUpArrowPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(keyboardUpArrowPress);
 
     }
 
@@ -56,18 +72,30 @@ public class KeyboardListener implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
+
             case KeyboardEvent.KEY_LEFT:
                 game.setDirections(Directions.LEFT);
                 break;
+
             case KeyboardEvent.KEY_RIGHT:
                 game.setDirections(Directions.RIGHT);
                 break;
-               // case KeyboardEvent.KEY_0:
+
+            case KeyboardEvent.KEY_UP:
+                game.setDirections(Directions.UP);
+                break;
+
+            case KeyboardEvent.KEY_Z:
+                game.punch();
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_Z:
+                game.resetPunch();
+        }
     }
 }

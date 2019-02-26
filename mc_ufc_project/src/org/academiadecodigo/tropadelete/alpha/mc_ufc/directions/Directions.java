@@ -4,5 +4,6 @@ public enum Directions {
     LEFT,
     RIGHT,
     ATTACK,
+    UP,
     NODIRECTION;
 }
