@@ -9,6 +9,7 @@ public class Main {
         Game game = new Game();
 
 
+        //listener is the object that enables input on keyboard
         KeyboardListener listener = new KeyboardListener(game);
 
 

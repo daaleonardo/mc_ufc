@@ -94,8 +94,10 @@ public class KeyboardListener implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
+
             case KeyboardEvent.KEY_Z:
                 game.resetPunch();
+                break;
         }
     }
 }
