@@ -67,7 +67,7 @@ public class Game {
     public void resetPunch() {
 
         try {
-            Thread.sleep(250);
+            Thread.sleep(100);
             armShape.delete();
 
         } catch (InterruptedException e) {
