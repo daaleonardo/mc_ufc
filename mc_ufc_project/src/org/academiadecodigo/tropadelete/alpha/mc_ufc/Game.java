@@ -1,57 +1,74 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.Grid;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 
 
 public class Game {
 
-    private Rectangle rectangle;
+    private GridRing ring;
     private Rectangle shape;
     private Rectangle armShape;
     private Directions directions;
-    private Picture picture;
+
+    private final int FIGHTER_SIZE = 300;
+    private final int ARM = 120;
+    private final int JUMP = 100;
+    private final int MOVEMENT = 10;
+
 
     public Game() {
-        rectangle = new Rectangle(10, 10, 1200, 600);
-        rectangle.draw();
-        /*picture = new Picture(5, 5, "Resources/mask.png");
-        picture.grow(-800, -1100);
-        picture.translate(-400, -1070);
-        picture.draw();*/
-        shape = new Rectangle(30, 310, 10, 300);
+
+        //GRID
+        ring = new GridRing(120, 60);
+        ring.init();
+
+        shape = new Rectangle(30, 310, ring.getCellSize(), FIGHTER_SIZE);
         shape.fill();
 
-        armShape = new Rectangle(shape.getX(), shape.getY() + 60, 120, 10);
+        armShape = new Rectangle(shape.getX(), shape.getY() + 60, ARM, ring.getCellSize());
         this.directions = Directions.NODIRECTION;
 
     }
 
-    public void start() {
-
-        //rectangle.draw();
-
-
-    }
 
     public void move() {
 
         switch (directions) {
+
             case RIGHT:
-                shape.translate(10, 0);
-                armShape.translate(10, 0);
+                if (shape.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                shape.translate(MOVEMENT, 0);
+                armShape.translate(MOVEMENT, 0);
                 break;
+
             case LEFT:
-                shape.translate(-10, 0);
-                armShape.translate(-10, 0);
+                if (shape.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                shape.translate(-MOVEMENT, 0);
+                armShape.translate(-MOVEMENT, 0);
                 break;
+
+            case UP:
+                shape.translate(0, -JUMP);
+                armShape.translate(0, -JUMP);
+                try {
+                    Thread.sleep(JUMP);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                shape.translate(0, JUMP);
+                armShape.translate(0, JUMP);
         }
 
         directions = Directions.NODIRECTION;
     }
+
 
     public void punch() {
 
@@ -76,6 +93,7 @@ public class Game {
     }
 
     public void setDirections(Directions direction) {
+
         this.directions = direction;
     }
 }
