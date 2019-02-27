@@ -12,6 +12,8 @@ public class Game {
     private Rectangle shape;
     private Rectangle armShape;
     private Directions directions;
+    private boolean punch;
+    private boolean punching;
 
     private final int FIGHTER_SIZE = 300;
     private final int ARM = 120;
@@ -72,12 +74,26 @@ public class Game {
 
     public void punch() {
 
-        try {
-            Thread.sleep(30);
-            armShape.fill();
+        if (punch == false) {
+            try {
+                Thread.sleep(50);
+                armShape.fill();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            punch = true;
+            return;
+        }
+    }
+
+    public void punching() {
+
+        if (punching == false) {
+
+            punch();
+            punching = true;
+            return;
         }
     }
 
@@ -90,6 +106,7 @@ public class Game {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        punch = false;
     }
 
     public void setDirections(Directions direction) {

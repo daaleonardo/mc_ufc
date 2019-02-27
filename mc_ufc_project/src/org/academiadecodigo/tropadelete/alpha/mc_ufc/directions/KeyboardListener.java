@@ -86,7 +86,9 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_Z:
-                game.punch();
+
+                game.punching();
+                break;
         }
     }
 
