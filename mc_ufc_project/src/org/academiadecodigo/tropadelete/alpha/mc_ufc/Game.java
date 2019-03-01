@@ -1,19 +1,31 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.Grid;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.DirectionsRightFighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 
 
 public class Game {
 
     private GridRing ring;
-    private Rectangle shape;
-    private Rectangle armShape;
+    private Picture shape;// PLAYER ON LEFT SIDE
+    private Picture form; // PLAYER ON RIGHT SIDE
+
+    private Picture armShape;
+    private Picture armShape2;
+
     private Directions directions;
+<<<<<<< HEAD
     private boolean punch;
     private boolean punching;
+=======
+    private DirectionsRightFighter directionsRightFighter;
+>>>>>>> f0b98893f117e4af83e07b2799e41e0b1ac93eed
 
     private final int FIGHTER_SIZE = 300;
     private final int ARM = 120;
@@ -27,14 +39,19 @@ public class Game {
         ring = new GridRing(120, 60);
         ring.init();
 
-        shape = new Rectangle(30, 310, ring.getCellSize(), FIGHTER_SIZE);
-        shape.fill();
+        shape = new Picture(30, 200 -50, "Resources/fighterLeft.png");
+        shape.draw();
 
-        armShape = new Rectangle(shape.getX(), shape.getY() + 60, ARM, ring.getCellSize());
+        form = new Picture(800, 200+ 40, "Resources/fighterRight.png");
+        form.draw();
+
+        armShape = new Picture(shape.getX()+240,shape.getY()+ 120,"Resources/leftfighterglove.png");
+        armShape2 = new Picture(form.getX()-60, form.getY()+ 65, "Resources/rightfighterglove.png");
+
+        this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
         this.directions = Directions.NODIRECTION;
 
     }
-
 
     public void move() {
 
@@ -71,13 +88,19 @@ public class Game {
         directions = Directions.NODIRECTION;
     }
 
-
     public void punch() {
 
+<<<<<<< HEAD
         if (punch == false) {
             try {
                 Thread.sleep(50);
                 armShape.fill();
+=======
+        try {
+            Thread.sleep(30);
+            armShape.draw();
+
+>>>>>>> f0b98893f117e4af83e07b2799e41e0b1ac93eed
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -109,8 +132,74 @@ public class Game {
         punch = false;
     }
 
+
     public void setDirections(Directions direction) {
 
         this.directions = direction;
     }
+
+    public void move2() {
+
+        switch (directionsRightFighter) {
+
+            case RIGHT:
+                if (form.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                form.translate(MOVEMENT, 0);
+                armShape2.translate(MOVEMENT, 0);
+                break;
+
+            case LEFT:
+                if (form.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                form.translate(-MOVEMENT, 0);
+                armShape2.translate(-MOVEMENT, 0);
+                break;
+
+            case UP:
+                form.translate(0, -JUMP);
+                armShape2.translate(0, -JUMP);
+                try {
+                    Thread.sleep(JUMP);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                form.translate(0, JUMP);
+                armShape2.translate(0, JUMP);
+        }
+
+        directionsRightFighter = DirectionsRightFighter.NODIRECTION;
+
+    }
+
+    public void punch2() {
+
+        try {
+            Thread.sleep(30);
+            armShape2.draw();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetPunch2() {
+
+        try {
+            Thread.sleep(250);
+            armShape2.delete();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDirectionsRightFighter(DirectionsRightFighter directionRightFighter) {
+        this.directionsRightFighter = directionRightFighter;
+    }
+
+
 }
