@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.DirectionsRightFighter;
@@ -12,11 +13,11 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 public class Game {
 
     private GridRing ring;
-    private Rectangle shape;// PLAYER ON LEFT SIDE
-    private Rectangle form; // PLAYER ON RIGHT SIDE
+    private Picture shape;// PLAYER ON LEFT SIDE
+    private Picture form; // PLAYER ON RIGHT SIDE
 
-    private Rectangle armShape;
-    private Rectangle armShape2;
+    private Picture armShape;
+    private Picture armShape2;
 
     private Directions directions;
     private DirectionsRightFighter directionsRightFighter;
@@ -33,17 +34,17 @@ public class Game {
         ring = new GridRing(120, 60);
         ring.init();
 
-        shape = new Rectangle(30, 310, ring.getCellSize(), FIGHTER_SIZE);
-        shape.fill();
+        shape = new Picture(30, 200 -50, "Resources/fighterLeft.png");
+        shape.draw();
 
-        form = new Rectangle(1000, 310, ring.getCellSize(), FIGHTER_SIZE);
-        form.fill();
+        form = new Picture(800, 200+ 40, "Resources/fighterRight.png");
+        form.draw();
 
-        armShape = new Rectangle(shape.getX(), shape.getY() + 60, ARM, ring.getCellSize());
-        this.directions = Directions.NODIRECTION;
+        armShape = new Picture(shape.getX()+240,shape.getY()+ 120,"Resources/leftfighterglove.png");
+        armShape2 = new Picture(form.getX()-60, form.getY()+ 65, "Resources/rightfighterglove.png");
 
-        armShape2 = new Rectangle(form.getX() - ARM, form.getY() + 60, ARM, ring.getCellSize());
         this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
+        this.directions = Directions.NODIRECTION;
 
     }
 
@@ -86,7 +87,7 @@ public class Game {
 
         try {
             Thread.sleep(30);
-            armShape.fill();
+            armShape.draw();
 
 
         } catch (InterruptedException e) {
@@ -151,7 +152,7 @@ public class Game {
 
         try {
             Thread.sleep(30);
-            armShape2.fill();
+            armShape2.draw();
 
 
         } catch (InterruptedException e) {
