@@ -1,17 +1,25 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.Grid;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.DirectionsRightFighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 
 
 public class Game {
 
     private GridRing ring;
-    private Rectangle shape;
+    private Rectangle shape;// PLAYER ON LEFT SIDE
+    private Rectangle form; // PLAYER ON RIGHT SIDE
+
     private Rectangle armShape;
+    private Rectangle armShape2;
+
     private Directions directions;
+    private DirectionsRightFighter directionsRightFighter;
 
     private final int FIGHTER_SIZE = 300;
     private final int ARM = 120;
@@ -28,11 +36,16 @@ public class Game {
         shape = new Rectangle(30, 310, ring.getCellSize(), FIGHTER_SIZE);
         shape.fill();
 
+        form = new Rectangle(1000, 310, ring.getCellSize(), FIGHTER_SIZE);
+        form.fill();
+
         armShape = new Rectangle(shape.getX(), shape.getY() + 60, ARM, ring.getCellSize());
         this.directions = Directions.NODIRECTION;
 
-    }
+        armShape2 = new Rectangle(form.getX(), form.getY() + 60, ARM, ring.getCellSize());
+        this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
 
+    }
 
     public void move() {
 
@@ -69,31 +82,49 @@ public class Game {
         directions = Directions.NODIRECTION;
     }
 
+    public void move2() {
 
-    public void punch() {
+        switch (directionsRightFighter) {
 
-        try {
-            Thread.sleep(30);
-            armShape.fill();
+            case RIGHT:
+                if (form.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                form.translate(MOVEMENT, 0);
+                armShape2.translate(MOVEMENT, 0);
+                break;
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            case LEFT:
+                if (form.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                    return;
+                }
+                form.translate(-MOVEMENT, 0);
+                armShape2.translate(-MOVEMENT, 0);
+                break;
+
+            case UP:
+                form.translate(0, -JUMP);
+                armShape2.translate(0, -JUMP);
+                try {
+                    Thread.sleep(JUMP);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                form.translate(0, JUMP);
+                armShape2.translate(0, JUMP);
         }
-    }
 
-    public void resetPunch() {
+        directionsRightFighter = DirectionsRightFighter.NODIRECTION;
 
-        try {
-            Thread.sleep(250);
-            armShape.delete();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setDirections(Directions direction) {
 
         this.directions = direction;
     }
+
+    public void setDirectionsRightFighter (DirectionsRightFighter directionRightFighter) {
+        this.directionsRightFighter = directionRightFighter;
+    }
+
 }
