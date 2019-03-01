@@ -1,6 +1,5 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
@@ -13,11 +12,9 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 public class Game {
 
     private GridRing ring;
-    private Picture shape;// PLAYER ON LEFT SIDE
-    private Picture form; // PLAYER ON RIGHT SIDE
 
-    private Picture armShape;
-    private Picture armShape2;
+    private Picture leftFighterArm;
+    private Picture rightFighterArm;
 
     private Directions directions;
     private DirectionsRightFighter directionsRightFighter;
@@ -27,6 +24,8 @@ public class Game {
     private final int JUMP = 100;
     private final int MOVEMENT = 10;
 
+    private Fighter leftFighter;
+    private Fighter rightFighter;
 
     public Game() {
 
@@ -34,14 +33,15 @@ public class Game {
         ring = new GridRing(120, 60);
         ring.init();
 
-        shape = new Picture(30, 200 -50, "Resources/fighterLeft.png");
-        shape.draw();
+        leftFighter = new LeftFighter(100, 30);
+        ((LeftFighter) leftFighter).draw();
 
-        form = new Picture(800, 200+ 40, "Resources/fighterRight.png");
-        form.draw();
+        rightFighter = new RightFighter(100, 700);
+        ((RightFighter) rightFighter).draw();
 
-        armShape = new Picture(shape.getX()+240,shape.getY()+ 120,"Resources/leftfighterglove.png");
-        armShape2 = new Picture(form.getX()-60, form.getY()+ 65, "Resources/rightfighterglove.png");
+
+        //leftFighterArm = new Picture(leftFighter.getX() + 240, leftFighter.getY(), "Resources/leftfighterglove.png");
+        //rightFighterArm = new Picture(rightFighter.getX() + 40, rightFighter.getY(), "Resources/rightfighterglove.png");
 
         this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
         this.directions = Directions.NODIRECTION;
@@ -53,57 +53,42 @@ public class Game {
         switch (directions) {
 
             case RIGHT:
-                if (shape.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (leftFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
                     return;
                 }
-                shape.translate(MOVEMENT, 0);
-                armShape.translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getShape().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(MOVEMENT, 0);
                 break;
 
             case LEFT:
-                if (shape.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (leftFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
                     return;
                 }
-                shape.translate(-MOVEMENT, 0);
-                armShape.translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getShape().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(-MOVEMENT, 0);
                 break;
 
             case UP:
-                shape.translate(0, -JUMP);
-                armShape.translate(0, -JUMP);
+                ((LeftFighter) leftFighter).getShape().translate(0, -JUMP);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, -JUMP);
                 try {
                     Thread.sleep(JUMP);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                shape.translate(0, JUMP);
-                armShape.translate(0, JUMP);
+                ((LeftFighter) leftFighter).getShape().translate(0, JUMP);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, JUMP);
         }
 
         directions = Directions.NODIRECTION;
     }
 
     public void punch() {
-
-        try {
-            Thread.sleep(30);
-            armShape.draw();
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ((LeftFighter) leftFighter).punch();
     }
 
     public void resetPunch() {
-
-        try {
-            Thread.sleep(250);
-            armShape.delete();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ((LeftFighter) leftFighter).resetPunch();
     }
 
 
@@ -117,31 +102,32 @@ public class Game {
         switch (directionsRightFighter) {
 
             case RIGHT:
-                if (form.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (rightFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+
                     return;
                 }
-                form.translate(MOVEMENT, 0);
-                armShape2.translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(MOVEMENT, 0);
                 break;
 
             case LEFT:
-                if (form.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (rightFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
                     return;
                 }
-                form.translate(-MOVEMENT, 0);
-                armShape2.translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getShape().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(-MOVEMENT, 0);
                 break;
 
             case UP:
-                form.translate(0, -JUMP);
-                armShape2.translate(0, -JUMP);
+                ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, -JUMP);
                 try {
                     Thread.sleep(JUMP);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                form.translate(0, JUMP);
-                armShape2.translate(0, JUMP);
+                ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm().translate(0, JUMP);
         }
 
         directionsRightFighter = DirectionsRightFighter.NODIRECTION;
@@ -150,25 +136,12 @@ public class Game {
 
     public void punch2() {
 
-        try {
-            Thread.sleep(30);
-            armShape2.draw();
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ((RightFighter) rightFighter).punch();
     }
 
     public void resetPunch2() {
 
-        try {
-            Thread.sleep(250);
-            armShape2.delete();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ((RightFighter) rightFighter).resetPunch();
     }
 
     public void setDirectionsRightFighter(DirectionsRightFighter directionRightFighter) {

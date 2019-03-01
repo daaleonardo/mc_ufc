@@ -1,5 +1,6 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter;
 
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 
@@ -7,8 +8,8 @@ import java.awt.*;
 
 public class LeftFighter extends Fighter {
 
-    private int health;
-    private Rectangle armShape;
+    private Picture leftFighterArm;
+    private Picture shape;
 
 
     private Directions directions;
@@ -18,8 +19,10 @@ public class LeftFighter extends Fighter {
     public LeftFighter(int health, int posX) {
         super(health, posX);
 
+        shape = new Picture(posX, 200 - 50, "Resources/fighterLeft.png");
 
-        armShape = new Rectangle(getX(), getY() + 60, ARM, 10);
+        leftFighterArm = new Picture(getX() + 240, getY(), "Resources/leftfighterglove.png");
+
         this.directions = Directions.NODIRECTION;
     }
 
@@ -27,7 +30,7 @@ public class LeftFighter extends Fighter {
 
         try {
             Thread.sleep(30);
-           // armShape.fill();
+            leftFighterArm.draw();
 
 
         } catch (InterruptedException e) {
@@ -39,10 +42,22 @@ public class LeftFighter extends Fighter {
 
         try {
             Thread.sleep(250);
-           // armShape.delete();
+            leftFighterArm.delete();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void draw() {
+        shape.draw();
+    }
+
+    public Picture getShape() {
+        return shape;
+    }
+
+    public Picture getLeftFighterArm() {
+        return leftFighterArm;
     }
 }

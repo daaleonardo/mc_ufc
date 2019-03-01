@@ -25,10 +25,7 @@ public abstract class Fighter {
 
     public Fighter(int health, int posX) {
 
-
-
         shape = new Rectangle(posX, 310, 10, FIGHTER_SIZE);
-        shape.fill();
 
         this.health = health;
         dead = false;
@@ -65,15 +62,13 @@ public abstract class Fighter {
 
     }
 
-    public int getX(){
+    public int getX() {
         return shape.getX();
     }
 
-    public int getY(){
+    public int getY() {
         return shape.getY();
     }
-
-
 
 
 }

@@ -1,13 +1,13 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 
 public class RightFighter extends Fighter {
 
-    private int health;
-    private Rectangle armShape;
+    private Picture rightFighterArm;
 
 
     private final int DAMAGE = 30;
@@ -21,22 +21,26 @@ public class RightFighter extends Fighter {
     private final int JUMP = 100;
     private final int MOVEMENT = 10;
 
+    private Picture shape;
+
     public RightFighter(int health, int posX) {
 
         super(health, posX);
 
-        armShape = new Rectangle(getX(), getY() + -60, ARM, 10);
+        rightFighterArm = new Picture(getX() + 40, getY(), "Resources/rightfighterglove.png");
+
+        shape = new Picture(800, 200 + 40, "Resources/fighterRight.png");
 
         this.directions = Directions.NODIRECTION;
 
     }
 
 
-public void punch() {
+    public void punch() {
 
         try {
             Thread.sleep(30);
-            armShape.fill();
+            rightFighterArm.draw();
 
 
         } catch (InterruptedException e) {
@@ -48,11 +52,23 @@ public void punch() {
 
         try {
             Thread.sleep(250);
-            armShape.delete();
+            rightFighterArm.delete();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void draw() {
+        shape.draw();
+    }
+
+    public Picture getShape() {
+        return shape;
+    }
+
+    public Picture getRightFighterArm(){
+        return rightFighterArm;
     }
 
 }
