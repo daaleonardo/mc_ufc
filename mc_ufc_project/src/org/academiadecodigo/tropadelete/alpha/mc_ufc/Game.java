@@ -42,7 +42,7 @@ public class Game {
         armShape = new Rectangle(shape.getX(), shape.getY() + 60, ARM, ring.getCellSize());
         this.directions = Directions.NODIRECTION;
 
-        armShape2 = new Rectangle(form.getX(), form.getY() + 60, ARM, ring.getCellSize());
+        armShape2 = new Rectangle(form.getX() - ARM, form.getY() + 60, ARM, ring.getCellSize());
         this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
 
     }
@@ -82,6 +82,35 @@ public class Game {
         directions = Directions.NODIRECTION;
     }
 
+    public void punch() {
+
+        try {
+            Thread.sleep(30);
+            armShape.fill();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetPunch() {
+
+        try {
+            Thread.sleep(250);
+            armShape.delete();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void setDirections(Directions direction) {
+
+        this.directions = direction;
+    }
+
     public void move2() {
 
         switch (directionsRightFighter) {
@@ -118,13 +147,32 @@ public class Game {
 
     }
 
-    public void setDirections(Directions direction) {
+    public void punch2() {
 
-        this.directions = direction;
+        try {
+            Thread.sleep(30);
+            armShape2.fill();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setDirectionsRightFighter (DirectionsRightFighter directionRightFighter) {
+    public void resetPunch2() {
+
+        try {
+            Thread.sleep(250);
+            armShape2.delete();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDirectionsRightFighter(DirectionsRightFighter directionRightFighter) {
         this.directionsRightFighter = directionRightFighter;
     }
+
 
 }

@@ -138,6 +138,8 @@ public class KeyboardListener implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
 
+
+            // LEFT FIGHTER
             case KeyboardEvent.KEY_A:
                 game.setDirections(Directions.LEFT);
                 break;
@@ -150,11 +152,12 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirections(Directions.UP);
                 break;
 
-           // case KeyboardEvent.KEY_R:
-             //   game.punch();
+            case KeyboardEvent.KEY_R:
+                game.punch();
+                break;
 
 
-                // right fighter
+            // RIGHT FIGHTER
             case KeyboardEvent.KEY_LEFT:
                 game.setDirectionsRightFighter(DirectionsRightFighter.LEFT);
                 break;
@@ -167,23 +170,25 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirectionsRightFighter(DirectionsRightFighter.UP);
                 break;
 
-           // case KeyboardEvent.KEY_SPACE:
-             //   game.getRightFighter().punch();
+            case KeyboardEvent.KEY_SPACE:
+                game.punch2();
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-       /* switch (keyboardEvent.getKey()) {
+       switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_R:
-                game.getLeftFighter().resetPunch();
+                game.resetPunch();
                 break;
 
-            case KeyboardEvent.KEY_Z:
-                game.getLeftFighter().resetPunch();
+
+
+            case KeyboardEvent.KEY_SPACE:
+                game.resetPunch2();
                 break;
-        }*/
+        }
     }
 }
