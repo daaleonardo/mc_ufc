@@ -62,13 +62,13 @@ public abstract class Fighter {
 
     }
 
-    public int getX() {
-        return shape.getX();
-    }
+    public abstract int getX();
 
-    public int getY() {
-        return shape.getY();
-    }
+    public abstract int getY();
+
+    //public void setPosX {
+
+    //}
 
 
 }

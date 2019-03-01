@@ -21,15 +21,16 @@ public class RightFighter extends Fighter {
     private final int JUMP = 100;
     private final int MOVEMENT = 10;
 
-    private Picture shape;
+    public Picture shape;
 
     public RightFighter(int health, int posX) {
 
         super(health, posX);
 
-        rightFighterArm = new Picture(getX() + 40, getY(), "Resources/rightfighterglove.png");
 
         shape = new Picture(800, 200 + 40, "Resources/fighterRight.png");
+
+        rightFighterArm = new Picture(getX() + 40, getY(), "Resources/rightfighterglove.png");
 
         this.directions = Directions.NODIRECTION;
 
@@ -71,4 +72,11 @@ public class RightFighter extends Fighter {
         return rightFighterArm;
     }
 
+    public int getX(){
+        return shape.getX();
+    }
+
+    public int getY(){
+        return shape.getY();
+    }
 }

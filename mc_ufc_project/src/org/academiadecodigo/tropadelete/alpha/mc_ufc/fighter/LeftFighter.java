@@ -60,4 +60,14 @@ public class LeftFighter extends Fighter {
     public Picture getLeftFighterArm() {
         return leftFighterArm;
     }
+
+
+    public int getX(){
+        return shape.getX();
+    }
+
+    public int getY(){
+        return shape.getY();
+    }
+
 }

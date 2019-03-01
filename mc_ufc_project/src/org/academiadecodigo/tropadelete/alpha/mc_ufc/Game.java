@@ -40,8 +40,6 @@ public class Game {
         ((RightFighter) rightFighter).draw();
 
 
-        //leftFighterArm = new Picture(leftFighter.getX() + 240, leftFighter.getY(), "Resources/leftfighterglove.png");
-        //rightFighterArm = new Picture(rightFighter.getX() + 40, rightFighter.getY(), "Resources/rightfighterglove.png");
 
         this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
         this.directions = Directions.NODIRECTION;
@@ -53,7 +51,7 @@ public class Game {
         switch (directions) {
 
             case RIGHT:
-                if (leftFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (leftFighter.getX() >= ring.getWidth() - 350) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
                 ((LeftFighter) leftFighter).getShape().translate(MOVEMENT, 0);
@@ -102,31 +100,30 @@ public class Game {
         switch (directionsRightFighter) {
 
             case RIGHT:
-                if (rightFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OF
-
+                if (rightFighter.getX() >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
                 ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
-                ((LeftFighter) leftFighter).getLeftFighterArm().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm().translate(MOVEMENT, 0);
                 break;
 
             case LEFT:
-                if (rightFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (rightFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
                 ((RightFighter) rightFighter).getShape().translate(-MOVEMENT, 0);
-                ((LeftFighter) leftFighter).getLeftFighterArm().translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm().translate(-MOVEMENT, 0);
                 break;
 
             case UP:
-                ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
-                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, -JUMP);
+                ((RightFighter) rightFighter).getShape().translate(0, -JUMP);
+                ((RightFighter) rightFighter).getRightFighterArm().translate(0, -JUMP);
                 try {
                     Thread.sleep(JUMP);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ((RightFighter) rightFighter).getShape().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getShape().translate(0, JUMP);
                 ((RightFighter) rightFighter).getRightFighterArm().translate(0, JUMP);
         }
 
