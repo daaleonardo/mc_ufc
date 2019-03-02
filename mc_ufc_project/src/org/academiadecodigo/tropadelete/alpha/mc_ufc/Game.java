@@ -83,6 +83,15 @@ public class Game {
 
     public void punch() {
         ((LeftFighter) leftFighter).punch();
+        if (rightFighter.getX() + 80 >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
+            ((RightFighter) rightFighter).getBodyShape().translate(0, 0);
+            ((RightFighter) rightFighter).getRightFighterArm().translate(0, 0);
+            return;
+        }
+        if (collisionDetector.leftPunch()) {  // MUDEI AQUI
+            ((RightFighter) rightFighter).getBodyShape().translate(80, 0);
+            ((RightFighter) rightFighter).getRightFighterArm().translate(80, 0);
+        }
     }
 
     public void resetPunch() {
@@ -138,6 +147,15 @@ public class Game {
     public void punch2() {
 
         ((RightFighter) rightFighter).punch();
+        if (leftFighter.getX() - 20 <= ring.PADDING + 30) { // BLOCKS THE PLAYER FROM GETTING OFF
+            ((LeftFighter) leftFighter).getBodyShape().translate(0, 0);
+            ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, 0);
+            return;
+        }
+        if (collisionDetector.rightPunch()) {  // MUDEI AQUI
+            ((LeftFighter) leftFighter).getBodyShape().translate(-80, 0);
+            ((LeftFighter) leftFighter).getLeftFighterArm().translate(-80, 0);
+        }
     }
 
     public void resetPunch2() {

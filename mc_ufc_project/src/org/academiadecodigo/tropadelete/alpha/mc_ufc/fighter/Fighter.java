@@ -59,6 +59,8 @@ public abstract class Fighter {
 
     public abstract int getY();
 
+
+
     //public void setPosX {
 
     //}

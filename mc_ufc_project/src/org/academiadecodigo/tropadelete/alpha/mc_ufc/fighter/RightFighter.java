@@ -69,6 +69,11 @@ public class RightFighter extends Fighter {
         return rightFighterArm;
     }
 
+    public  int getArmX(){
+        return rightFighterArm.getX(); //FIZ
+    }
+
+
     public int getX(){
         return bodyShape.getX();
     }
