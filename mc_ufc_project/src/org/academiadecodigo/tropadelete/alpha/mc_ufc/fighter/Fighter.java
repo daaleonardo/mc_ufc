@@ -1,8 +1,5 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Utils.HealthBar;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 
 public abstract class Fighter {

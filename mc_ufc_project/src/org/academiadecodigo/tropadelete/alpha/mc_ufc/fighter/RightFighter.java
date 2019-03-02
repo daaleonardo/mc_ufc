@@ -1,15 +1,16 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.Utils.HealthBar;
-import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 
 public class RightFighter extends Fighter {
 
 
-    private Picture bodyShape;
+    private Picture bodyShapeClosed;
+    private Picture bodyShapeOpen;
     private Picture rightFighterArm;
+    private Picture rightFighterArm_2;
+    private Picture rightFighterArm_3;
+    private Picture rightFighterArm_4;
 
 
     public RightFighter(int health, int posX) {
@@ -17,9 +18,13 @@ public class RightFighter extends Fighter {
         super(health, posX);
 
 
-        bodyShape = new Picture(posX, 200 + 40, "Resources/fighterRight.png");
+        bodyShapeClosed = new Picture(posX - 80, 220, "Resources/fighterRightClosed.png");
+        bodyShapeOpen = new Picture(posX - 140, 220, "Resources/fighterRightOpen.png");
 
-        rightFighterArm = new Picture(getX() - 50, getY() + 60, "Resources/rightfighterglove.png");
+        rightFighterArm = new Picture(getX() - 90, getY(), "Resources/punch-right-1.png");
+        rightFighterArm_2 = new Picture(getX() - 150, getY(), "Resources/punch-right-2.png");
+        rightFighterArm_3 = new Picture(getX() - 150, getY(), "Resources/punch-right-3.png");
+        rightFighterArm_4 = new Picture(getX() - 150, getY(), "Resources/punch-right-4.png");
 
     }
 
@@ -27,8 +32,14 @@ public class RightFighter extends Fighter {
     public void punch() {
 
         try {
-            Thread.sleep(30);
-            rightFighterArm.draw();
+            rightFighterArm.delete();
+            rightFighterArm_2.draw();
+            Thread.sleep(90);
+            rightFighterArm_2.delete();
+            rightFighterArm_3.draw();
+            Thread.sleep(90);
+            rightFighterArm_3.delete();
+            rightFighterArm_4.draw();
 
 
         } catch (InterruptedException e) {
@@ -40,35 +51,69 @@ public class RightFighter extends Fighter {
 
         try {
             Thread.sleep(250);
-            rightFighterArm.delete();
+            rightFighterArm_4.delete();
+            rightFighterArm.draw();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void draw() {
-        bodyShape.draw();
+    public void drawBodyClosed() {
+        bodyShapeClosed.draw();
     }
 
-    public Picture getBodyShape() {
-        return bodyShape;
+    public void deleteBodyClosed() {
+        bodyShapeClosed.delete();
     }
 
-    public Picture getRightFighterArm(){
+    public void drawBodyOpen() {
+        bodyShapeOpen.draw();
+    }
+
+    public void deleteBodyOpen() {
+        bodyShapeOpen.delete();
+    }
+
+    public void drawArm() {
+        rightFighterArm.draw();
+    }
+
+
+    public Picture getRightFighterArm() {
         return rightFighterArm;
     }
 
-    public  int getArmX(){
+    public Picture getRightFighterArm_2(){
+        return rightFighterArm_2;
+    }
+
+    public Picture getRightFighterArm_3(){
+        return rightFighterArm_3;
+    }
+
+    public Picture getRightFighterArm_4(){
+        return rightFighterArm_4;
+    }
+
+    public Picture getBodyShapeClosed() {
+        return bodyShapeClosed;
+    }
+
+    public Picture getBodyShapeOpen() {
+        return bodyShapeOpen;
+    }
+
+    public int getArmX() {
         return rightFighterArm.getX(); //FIZ
     }
 
 
-    public int getX(){
-        return bodyShape.getX();
+    public int getX() {
+        return bodyShapeClosed.getX();
     }
 
-    public int getY(){
-        return bodyShape.getY();
+    public int getY() {
+        return bodyShapeClosed.getY();
     }
 }

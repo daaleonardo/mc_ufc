@@ -13,7 +13,7 @@ public class Main {
 
 
         while (true) {
-            if (game.isLeftFighterDead() || game.isRightFighterDead()) {
+            if (game.isGameEnd()) {
                 game.endGame();
                 return;
             }

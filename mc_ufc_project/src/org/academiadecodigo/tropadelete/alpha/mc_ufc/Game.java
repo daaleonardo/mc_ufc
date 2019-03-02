@@ -35,10 +35,12 @@ public class Game {
         ring.init();
 
         leftFighter = new LeftFighter(100, 30);
-        ((LeftFighter) leftFighter).draw();
+        ((LeftFighter) leftFighter).drawBodyClosed();
+        ((LeftFighter) leftFighter).drawArm();
 
-        rightFighter = new RightFighter(100, 800);
-        ((RightFighter) rightFighter).draw();
+        rightFighter = new RightFighter(100, 1080);
+        ((RightFighter) rightFighter).drawBodyClosed();
+        ((RightFighter) rightFighter).drawArm();
 
 
         this.directionsRightFighter = DirectionsRightFighter.NODIRECTION;
@@ -64,30 +66,54 @@ public class Game {
                     if (rightFighter.getX() >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
                         return;
                     }
-                    ((RightFighter) rightFighter).getBodyShape().translate(MOVEMENT, 0);
+                    ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
+                    ((RightFighter) rightFighter).getBodyShapeOpen().translate(MOVEMENT, 0);
                     ((RightFighter) rightFighter).getRightFighterArm().translate(MOVEMENT, 0);
+                    ((RightFighter) rightFighter).getRightFighterArm_2().translate(MOVEMENT, 0);
+                    ((RightFighter) rightFighter).getRightFighterArm_3().translate(MOVEMENT, 0);
+                    ((RightFighter) rightFighter).getRightFighterArm_4().translate(MOVEMENT, 0);
                 }
-                ((LeftFighter) leftFighter).getBodyShape().translate(MOVEMENT, 0);
+                try {
+                    ((LeftFighter) leftFighter).deleteBodyClosed();
+                    ((LeftFighter) leftFighter).drawBodyOpen();
+                    Thread.sleep(50);
+                    ((LeftFighter) leftFighter).deleteBodyOpen();
+                    ((LeftFighter) leftFighter).drawBodyClosed();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getBodyShapeOpen().translate(MOVEMENT, 0);
                 ((LeftFighter) leftFighter).getLeftFighterArm().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_2().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_3().translate(MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_4().translate(MOVEMENT, 0);
                 break;
 
             case LEFT:
                 if (leftFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
                     return;
                 }
-                ((LeftFighter) leftFighter).getBodyShape().translate(-MOVEMENT, 0);
+
+                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-MOVEMENT, 0);
                 ((LeftFighter) leftFighter).getLeftFighterArm().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getBodyShapeOpen().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_2().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_3().translate(-MOVEMENT, 0);
+                ((LeftFighter) leftFighter).getLeftFighterArm_4().translate(-MOVEMENT, 0);
                 break;
 
             case UP:
-                ((LeftFighter) leftFighter).getBodyShape().translate(0, -JUMP);
+                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, -JUMP);
                 ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, -JUMP);
                 try {
                     Thread.sleep(JUMP);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ((LeftFighter) leftFighter).getBodyShape().translate(0, JUMP);
+                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, JUMP);
                 ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, JUMP);
         }
 
@@ -98,26 +124,35 @@ public class Game {
         ((LeftFighter) leftFighter).punch();
 
 
-        if (rightFighter.getX() + 80 >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
+        if (rightFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OFF
 
-            if (collisionDetector.rightPunch()) {
+            if (collisionDetector.leftPunch()) {
                 leftFighter.hit(rightFighter);
                 System.out.println("Right Fighter health is: " + rightFighter.getHealth());
+                System.out.println("Is Right Fighter dead? " + rightFighter.isDead());
             }
 
-            ((RightFighter) rightFighter).getBodyShape().translate(0, 0);
+            ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(0, 0);
             return;
         }
         if (collisionDetector.leftPunch()) {  // MUDEI AQUI
             leftFighter.hit(rightFighter);
             System.out.println("Right Fighter health is: " + rightFighter.getHealth());
-            ((RightFighter) rightFighter).getBodyShape().translate(80, 0);
+            System.out.println("Is right Fighter dead? " + rightFighter.isDead());
+            ((RightFighter) rightFighter).getBodyShapeClosed().translate(80, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(80, 0);
+            ((RightFighter) rightFighter).getBodyShapeOpen().translate(80, 0);
+            ((RightFighter) rightFighter).getRightFighterArm_2().translate(80, 0);
+            ((RightFighter) rightFighter).getRightFighterArm_3().translate(80, 0);
+            ((RightFighter) rightFighter).getRightFighterArm_4().translate(80, 0);
         }
         rightHealthBar.delete();
         rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
         rightHealthBar.show();
+        if (rightFighter.isDead()) {
+            endGame();
+        }
     }
 
     public void resetPunch() {
@@ -135,11 +170,15 @@ public class Game {
         switch (directionsRightFighter) {
 
             case RIGHT:
-                if (rightFighter.getX() >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
+                if (rightFighter.getX() >= ring.getWidth() - 200) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
-                ((RightFighter) rightFighter).getBodyShape().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
                 ((RightFighter) rightFighter).getRightFighterArm().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getBodyShapeOpen().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_2().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_3().translate(MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_4().translate(MOVEMENT, 0);
                 break;
 
             case LEFT:
@@ -147,22 +186,41 @@ public class Game {
                     if (leftFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OFF
                         return;
                     }
-                    ((LeftFighter) leftFighter).getBodyShape().translate(-MOVEMENT, 0);
+                    ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-MOVEMENT, 0);
                     ((LeftFighter) leftFighter).getLeftFighterArm().translate(-MOVEMENT, 0);
+                    ((LeftFighter) leftFighter).getBodyShapeOpen().translate(-MOVEMENT, 0);
+                    ((LeftFighter) leftFighter).getLeftFighterArm_2().translate(-MOVEMENT, 0);
+                    ((LeftFighter) leftFighter).getLeftFighterArm_3().translate(-MOVEMENT, 0);
+                    ((LeftFighter) leftFighter).getLeftFighterArm_4().translate(-MOVEMENT, 0);
+
                 }
-                ((RightFighter) rightFighter).getBodyShape().translate(-MOVEMENT, 0);
+                try {
+                    ((RightFighter) rightFighter).deleteBodyClosed();
+                    ((RightFighter) rightFighter).drawBodyOpen();
+                    Thread.sleep(50);
+                    ((RightFighter) rightFighter).deleteBodyOpen();
+                    ((RightFighter) rightFighter).drawBodyClosed();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ((RightFighter) rightFighter).getBodyShapeClosed().translate(-MOVEMENT, 0);
                 ((RightFighter) rightFighter).getRightFighterArm().translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getBodyShapeOpen().translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_2().translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_3().translate(-MOVEMENT, 0);
+                ((RightFighter) rightFighter).getRightFighterArm_4().translate(-MOVEMENT, 0);
                 break;
 
             case UP:
-                ((RightFighter) rightFighter).getBodyShape().translate(0, -JUMP);
+                ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, -JUMP);
                 ((RightFighter) rightFighter).getRightFighterArm().translate(0, -JUMP);
                 try {
                     Thread.sleep(JUMP);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ((RightFighter) rightFighter).getBodyShape().translate(0, JUMP);
+                ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, JUMP);
                 ((RightFighter) rightFighter).getRightFighterArm().translate(0, JUMP);
         }
 
@@ -180,9 +238,10 @@ public class Game {
             if (collisionDetector.rightPunch()) {
                 rightFighter.hit(leftFighter);
                 System.out.println("Left Fighter health is: " + leftFighter.getHealth());
+                System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
             }
 
-            ((LeftFighter) leftFighter).getBodyShape().translate(0, 0);
+            ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, 0);
             return;
         }
@@ -191,12 +250,20 @@ public class Game {
 
 
             System.out.println("Left Fighter health is: " + leftFighter.getHealth());
-            ((LeftFighter) leftFighter).getBodyShape().translate(-80, 0);
+            System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
+            ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-80, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(-80, 0);
+            ((LeftFighter) leftFighter).getBodyShapeOpen().translate(-80, 0);
+            ((LeftFighter) leftFighter).getLeftFighterArm_2().translate(-80, 0);
+            ((LeftFighter) leftFighter).getLeftFighterArm_3().translate(-80, 0);
+            ((LeftFighter) leftFighter).getLeftFighterArm_4().translate(-80, 0);
         }
         leftHealthBar.delete();
         leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
         leftHealthBar.show();
+        if (leftFighter.isDead()) {
+            endGame();
+        }
     }
 
     public void resetPunch2() {
@@ -208,23 +275,19 @@ public class Game {
         this.directionsRightFighter = directionRightFighter;
     }
 
-    public boolean isRightFighterDead() {
-        return rightFighter.getHealth() <= 0;
-    }
-
-    public boolean isLeftFighterDead() {
-        return leftFighter.getHealth() <= 0;
-    }
 
     public void endGame() {
-        ((RightFighter) rightFighter).getBodyShape().delete();
-        ((LeftFighter) leftFighter).getBodyShape().delete();
-        ((RightFighter) rightFighter).getRightFighterArm().delete();
-        ((LeftFighter) leftFighter).getLeftFighterArm().delete();
-        leftHealthBar.delete();
-        rightHealthBar.delete();
+        if (rightFighter.isDead() || leftFighter.isDead()) {
 
-        gameEnd = true;
+            ((RightFighter) rightFighter).getBodyShapeClosed().delete();
+            ((LeftFighter) leftFighter).getBodyShapeClosed().delete();
+            ((RightFighter) rightFighter).getRightFighterArm().delete();
+            ((LeftFighter) leftFighter).getLeftFighterArm().delete();
+            leftHealthBar.delete();
+            rightHealthBar.delete();
+
+            gameEnd = true;
+        }
     }
 
     public boolean isGameEnd() {

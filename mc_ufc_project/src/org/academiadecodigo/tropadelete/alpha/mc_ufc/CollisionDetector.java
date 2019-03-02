@@ -17,15 +17,15 @@ public class CollisionDetector {
     }
 
     public boolean isUnsafe() {
-        return leftFighter.getX() + 310 == rightFighter.getX();
+        return leftFighter.getX() + 290 == rightFighter.getX();
     }
 
     public boolean leftPunch() {
-        return ((LeftFighter) leftFighter).getArmX() + 90 >= rightFighter.getX();
+        return ((LeftFighter) leftFighter).getArmX() >= rightFighter.getX() - 220;
     }
 
     public boolean rightPunch(){
-        return ((RightFighter) rightFighter).getArmX() <= leftFighter.getX() + 310;
+        return ((RightFighter) rightFighter).getArmX() <= leftFighter.getX() + 220;
     }
 
 
