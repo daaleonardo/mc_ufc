@@ -13,10 +13,14 @@ public class Main {
 
 
         while (true) {
+            if (game.isLeftFighterDead() || game.isRightFighterDead()) {
+                game.endGame();
+                return;
+            }
             try {
                 Thread.sleep(30);
                 game.move();
-
+                Thread.sleep(30);
                 game.move2();
 
             } catch (InterruptedException e) {

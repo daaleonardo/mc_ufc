@@ -153,6 +153,9 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_R:
+                if (game.isGameEnd()) {
+                    break;
+                }
                 game.punch();
                 break;
 
@@ -171,20 +174,22 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
+                if (game.isGameEnd()){
+                    break;
+                }
                 game.punch2();
-                 break;
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-       switch (keyboardEvent.getKey()) {
+        switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_R:
                 game.resetPunch();
                 break;
-
 
 
             case KeyboardEvent.KEY_SPACE:

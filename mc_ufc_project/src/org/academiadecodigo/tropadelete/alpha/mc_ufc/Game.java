@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Utils.HealthBar;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.DirectionsRightFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
@@ -22,6 +23,10 @@ public class Game {
     private Fighter rightFighter;
 
     private CollisionDetector collisionDetector;
+    private HealthBar leftHealthBar;
+    private HealthBar rightHealthBar;
+
+    private boolean gameEnd;
 
     public Game() {
 
@@ -40,6 +45,14 @@ public class Game {
         this.directions = Directions.NODIRECTION;
 
         collisionDetector = new CollisionDetector(leftFighter, rightFighter);
+
+        leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
+        leftHealthBar.show();
+
+        rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
+        rightHealthBar.show();
+
+        gameEnd = false;
     }
 
     public void move() {
@@ -83,15 +96,28 @@ public class Game {
 
     public void punch() {
         ((LeftFighter) leftFighter).punch();
+
+
         if (rightFighter.getX() + 80 >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
+
+            if (collisionDetector.rightPunch()) {
+                leftFighter.hit(rightFighter);
+                System.out.println("Right Fighter health is: " + rightFighter.getHealth());
+            }
+
             ((RightFighter) rightFighter).getBodyShape().translate(0, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(0, 0);
             return;
         }
         if (collisionDetector.leftPunch()) {  // MUDEI AQUI
+            leftFighter.hit(rightFighter);
+            System.out.println("Right Fighter health is: " + rightFighter.getHealth());
             ((RightFighter) rightFighter).getBodyShape().translate(80, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(80, 0);
         }
+        rightHealthBar.delete();
+        rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
+        rightHealthBar.show();
     }
 
     public void resetPunch() {
@@ -147,15 +173,30 @@ public class Game {
     public void punch2() {
 
         ((RightFighter) rightFighter).punch();
+
+
         if (leftFighter.getX() - 20 <= ring.PADDING + 30) { // BLOCKS THE PLAYER FROM GETTING OFF
+
+            if (collisionDetector.rightPunch()) {
+                rightFighter.hit(leftFighter);
+                System.out.println("Left Fighter health is: " + leftFighter.getHealth());
+            }
+
             ((LeftFighter) leftFighter).getBodyShape().translate(0, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, 0);
             return;
         }
         if (collisionDetector.rightPunch()) {  // MUDEI AQUI
+            rightFighter.hit(leftFighter);
+
+
+            System.out.println("Left Fighter health is: " + leftFighter.getHealth());
             ((LeftFighter) leftFighter).getBodyShape().translate(-80, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(-80, 0);
         }
+        leftHealthBar.delete();
+        leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
+        leftHealthBar.show();
     }
 
     public void resetPunch2() {
@@ -167,5 +208,27 @@ public class Game {
         this.directionsRightFighter = directionRightFighter;
     }
 
+    public boolean isRightFighterDead() {
+        return rightFighter.getHealth() <= 0;
+    }
+
+    public boolean isLeftFighterDead() {
+        return leftFighter.getHealth() <= 0;
+    }
+
+    public void endGame() {
+        ((RightFighter) rightFighter).getBodyShape().delete();
+        ((LeftFighter) leftFighter).getBodyShape().delete();
+        ((RightFighter) rightFighter).getRightFighterArm().delete();
+        ((LeftFighter) leftFighter).getLeftFighterArm().delete();
+        leftHealthBar.delete();
+        rightHealthBar.delete();
+
+        gameEnd = true;
+    }
+
+    public boolean isGameEnd() {
+        return gameEnd;
+    }
 
 }

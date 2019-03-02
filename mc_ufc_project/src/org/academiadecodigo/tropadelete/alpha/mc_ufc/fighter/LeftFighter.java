@@ -9,10 +9,6 @@ public class LeftFighter extends Fighter {
     private Picture bodyShape;
 
 
-    //private Directions directions;
-    private final int ARM = 120;
-
-
     public LeftFighter(int health, int posX) {
         super(health, posX);
 
@@ -20,7 +16,6 @@ public class LeftFighter extends Fighter {
 
         leftFighterArm = new Picture(getX() + 240, getY() + 130, "Resources/leftfighterglove.png");
 
-      //  this.directions = Directions.NODIRECTION;
     }
 
     public void punch() {
@@ -59,7 +54,7 @@ public class LeftFighter extends Fighter {
     }
 
     public int getArmX(){
-        return leftFighterArm.getX(); // FIZ
+        return leftFighterArm.getX();
     }
 
 
