@@ -172,7 +172,7 @@ public class KeyboardListener implements KeyboardHandler {
 
             case KeyboardEvent.KEY_SPACE:
                 game.punch2();
-                break;
+                 break;
         }
     }
 

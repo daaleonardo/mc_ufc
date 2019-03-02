@@ -17,15 +17,12 @@ public abstract class Fighter {
     final int JUMP = 100;
     final int MOVEMENT = 10;
 
-    Rectangle shape;
     GridRing ring;
 
     private final int FIGHTER_SIZE = 300;
 
 
     public Fighter(int health, int posX) {
-
-        shape = new Rectangle(posX, 310, 10, FIGHTER_SIZE);
 
         this.health = health;
         dead = false;
@@ -55,10 +52,6 @@ public abstract class Fighter {
             return;
         }
         health -= randomDamage;
-
-    }
-
-    public void movement() {
 
     }
 
