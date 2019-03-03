@@ -9,7 +9,6 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 
-
 public class KeyboardListener implements KeyboardHandler {
 
     private Game game;
@@ -174,7 +173,7 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                if (game.isGameEnd()){
+                if (game.isGameEnd()) {
                     break;
                 }
                 game.punch2();

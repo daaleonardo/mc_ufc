@@ -85,24 +85,4 @@ public class GridRing implements Grid {
         return CELL_SIZE;
     }
 
-
-    /**
-     * Auxiliary method to compute the y value that corresponds to a specific row
-     *
-     * @param row index
-     * @return y pixel value
-     */
-    public int rowToY(int row) {
-        return (row * CELL_SIZE) + PADDING;
-    }
-
-    /**
-     * Auxiliary method to compute the x value that corresponds to a specific column
-     *
-     * @param column index
-     * @return x pixel value
-     */
-    public int columnToX(int column) {
-        return (column * CELL_SIZE) + PADDING;
-    }
 }

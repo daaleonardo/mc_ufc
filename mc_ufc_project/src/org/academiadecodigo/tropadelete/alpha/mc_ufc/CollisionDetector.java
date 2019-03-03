@@ -1,10 +1,8 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
-
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
-
 
 public class CollisionDetector {
 
@@ -24,7 +22,7 @@ public class CollisionDetector {
         return ((LeftFighter) leftFighter).getArmX() >= rightFighter.getX() - 220;
     }
 
-    public boolean rightPunch(){
+    public boolean rightPunch() {
         return ((RightFighter) rightFighter).getArmX() <= leftFighter.getX() + 220;
     }
 

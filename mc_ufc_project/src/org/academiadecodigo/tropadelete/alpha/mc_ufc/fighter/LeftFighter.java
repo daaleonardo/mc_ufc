@@ -2,17 +2,15 @@ package org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.prefs.PreferenceChangeEvent;
-
-
 public class LeftFighter extends Fighter {
+
+    private Picture bodyShapeClosed;
+    private Picture bodyShapeOpen;
 
     private Picture leftFighterArm;
     private Picture leftFighterArm_2;
     private Picture leftFighterArm_3;
     private Picture leftFighterArm_4;
-    private Picture bodyShapeClosed;
-    private Picture bodyShapeOpen;
 
 
     public LeftFighter(int health, int posX) {
@@ -25,8 +23,6 @@ public class LeftFighter extends Fighter {
         leftFighterArm_2 = new Picture(getX() + 90, getY(), "Resources/punch-left-2.png");
         leftFighterArm_3 = new Picture(getX() + 90, getY(), "Resources/punch-left-3.png");
         leftFighterArm_4 = new Picture(getX() + 90, getY(), "Resources/punch-left-4.png");
-
-
     }
 
     public void punch() {
@@ -91,17 +87,17 @@ public class LeftFighter extends Fighter {
         return leftFighterArm;
     }
 
-    public Picture getLeftFighterArm_2(){
+    public Picture getLeftFighterArm_2() {
         return leftFighterArm_2;
     }
 
-     public Picture getLeftFighterArm_3(){
+    public Picture getLeftFighterArm_3() {
         return leftFighterArm_3;
-     }
+    }
 
-     public Picture getLeftFighterArm_4(){
+    public Picture getLeftFighterArm_4() {
         return leftFighterArm_4;
-     }
+    }
 
     public int getArmX() {
         return leftFighterArm_4.getX();

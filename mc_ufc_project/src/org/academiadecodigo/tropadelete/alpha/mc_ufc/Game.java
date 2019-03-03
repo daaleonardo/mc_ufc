@@ -8,7 +8,6 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 
-
 public class Game {
 
     private GridRing ring;
@@ -23,6 +22,7 @@ public class Game {
     private Fighter rightFighter;
 
     private CollisionDetector collisionDetector;
+
     private HealthBar leftHealthBar;
     private HealthBar rightHealthBar;
 
@@ -34,10 +34,13 @@ public class Game {
         ring = new GridRing(120, 60);
         ring.init();
 
+
+        //LEFT FIGHTER
         leftFighter = new LeftFighter(100, 30);
         ((LeftFighter) leftFighter).drawBodyClosed();
         ((LeftFighter) leftFighter).drawArm();
 
+        //RIGHT FIGHTER
         rightFighter = new RightFighter(100, 1080);
         ((RightFighter) rightFighter).drawBodyClosed();
         ((RightFighter) rightFighter).drawArm();
@@ -50,20 +53,21 @@ public class Game {
 
         leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
         leftHealthBar.show();
-
         rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
         rightHealthBar.show();
 
         gameEnd = false;
     }
 
+
+    //                                                   LEFT FIGHTER
     public void move() {
 
         switch (directions) {
 
             case RIGHT:
                 if (collisionDetector.isUnsafe()) {
-                    if (rightFighter.getX() >= ring.getWidth() - 310) { // BLOCKS THE PLAYER FROM GETTING OFF
+                    if (rightFighter.getX() >= ring.getWidth() - 310) {
                         return;
                     }
                     ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
@@ -76,7 +80,7 @@ public class Game {
                 try {
                     ((LeftFighter) leftFighter).deleteBodyClosed();
                     ((LeftFighter) leftFighter).drawBodyOpen();
-                    Thread.sleep(50);
+                    Thread.sleep(70);
                     ((LeftFighter) leftFighter).deleteBodyOpen();
                     ((LeftFighter) leftFighter).drawBodyClosed();
 
@@ -120,11 +124,11 @@ public class Game {
         directions = Directions.NODIRECTION;
     }
 
+
     public void punch() {
         ((LeftFighter) leftFighter).punch();
 
-
-        if (rightFighter.getX() >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OFF
+        if (rightFighter.getX() + 200 >= ring.getWidth()) {
 
             if (collisionDetector.leftPunch()) {
                 leftFighter.hit(rightFighter);
@@ -134,9 +138,15 @@ public class Game {
 
             ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(0, 0);
+            rightHealthBar.delete();
+            rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
+            rightHealthBar.show();
+            if (rightFighter.isDead()) {
+                endGame();
+            }
             return;
         }
-        if (collisionDetector.leftPunch()) {  // MUDEI AQUI
+        if (collisionDetector.leftPunch()) {
             leftFighter.hit(rightFighter);
             System.out.println("Right Fighter health is: " + rightFighter.getHealth());
             System.out.println("Is right Fighter dead? " + rightFighter.isDead());
@@ -165,12 +175,14 @@ public class Game {
         this.directions = direction;
     }
 
+
+    //                                      RIGHT FIGHTER
     public void move2() {
 
         switch (directionsRightFighter) {
 
             case RIGHT:
-                if (rightFighter.getX() >= ring.getWidth() - 200) { // BLOCKS THE PLAYER FROM GETTING OFF
+                if (rightFighter.getX() +220 >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
                 ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
@@ -197,7 +209,7 @@ public class Game {
                 try {
                     ((RightFighter) rightFighter).deleteBodyClosed();
                     ((RightFighter) rightFighter).drawBodyOpen();
-                    Thread.sleep(50);
+                    Thread.sleep(70);
                     ((RightFighter) rightFighter).deleteBodyOpen();
                     ((RightFighter) rightFighter).drawBodyClosed();
 
@@ -243,12 +255,17 @@ public class Game {
 
             ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, 0);
+            leftHealthBar.delete();
+            leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
+            leftHealthBar.show();
+            if (leftFighter.isDead()) {
+                endGame();
+            }
+
             return;
         }
-        if (collisionDetector.rightPunch()) {  // MUDEI AQUI
+        if (collisionDetector.rightPunch()) {
             rightFighter.hit(leftFighter);
-
-
             System.out.println("Left Fighter health is: " + leftFighter.getHealth());
             System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
             ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-80, 0);

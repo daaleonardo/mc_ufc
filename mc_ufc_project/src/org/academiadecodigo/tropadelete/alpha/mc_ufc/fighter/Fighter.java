@@ -11,14 +11,11 @@ public abstract class Fighter {
     private Directions directions;
 
 
-
-
     public Fighter(int health, int posX) {
 
         this.health = health;
         dead = false;
         this.directions = Directions.NODIRECTION;
-
     }
 
     public boolean isDead() {
@@ -35,6 +32,7 @@ public abstract class Fighter {
     }
 
     public void sufferDamage() {
+
         randomDamage = (int) (Math.random() * DAMAGE);
 
         if (randomDamage >= health) {
@@ -43,15 +41,11 @@ public abstract class Fighter {
             return;
         }
         health -= randomDamage;
-
-
     }
-
 
     public abstract int getX();
 
     public abstract int getY();
-
 
 
 }

@@ -4,9 +4,9 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class RightFighter extends Fighter {
 
-
     private Picture bodyShapeClosed;
     private Picture bodyShapeOpen;
+
     private Picture rightFighterArm;
     private Picture rightFighterArm_2;
     private Picture rightFighterArm_3;
@@ -25,9 +25,7 @@ public class RightFighter extends Fighter {
         rightFighterArm_2 = new Picture(getX() - 150, getY(), "Resources/punch-right-2.png");
         rightFighterArm_3 = new Picture(getX() - 150, getY(), "Resources/punch-right-3.png");
         rightFighterArm_4 = new Picture(getX() - 150, getY(), "Resources/punch-right-4.png");
-
     }
-
 
     public void punch() {
 
@@ -84,15 +82,15 @@ public class RightFighter extends Fighter {
         return rightFighterArm;
     }
 
-    public Picture getRightFighterArm_2(){
+    public Picture getRightFighterArm_2() {
         return rightFighterArm_2;
     }
 
-    public Picture getRightFighterArm_3(){
+    public Picture getRightFighterArm_3() {
         return rightFighterArm_3;
     }
 
-    public Picture getRightFighterArm_4(){
+    public Picture getRightFighterArm_4() {
         return rightFighterArm_4;
     }
 

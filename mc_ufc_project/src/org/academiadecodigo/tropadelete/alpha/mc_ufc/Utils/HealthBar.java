@@ -20,7 +20,7 @@ public class HealthBar {
         healthBar.fill();
     }
 
-    public void delete(){
+    public void delete() {
         healthBar.delete();
     }
 }
