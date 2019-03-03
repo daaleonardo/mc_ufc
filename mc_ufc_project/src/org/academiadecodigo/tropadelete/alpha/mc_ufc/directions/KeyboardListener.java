@@ -5,6 +5,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Game;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Screen.StartGame;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
@@ -14,11 +15,25 @@ public class KeyboardListener implements KeyboardHandler {
     private Game game;
 
 
+
     public KeyboardListener(Game game) {
 
         this.game = game;
 
+
         Keyboard keyboard = new Keyboard(this);
+
+
+        //START GAME
+
+        KeyboardEvent keyboardStart = new KeyboardEvent();
+
+        keyboardStart.setKey(KeyboardEvent.KEY_SPACE);
+
+        keyboardStart.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(keyboardStart);
+
 
         /**
          * KEYS FOR
@@ -103,7 +118,7 @@ public class KeyboardListener implements KeyboardHandler {
         //PUNCH
         KeyboardEvent keyboardSpacebuttonPress = new KeyboardEvent();
 
-        keyboardSpacebuttonPress.setKey(KeyboardEvent.KEY_SPACE);
+        keyboardSpacebuttonPress.setKey(KeyboardEvent.KEY_L);
 
         keyboardSpacebuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
@@ -113,7 +128,7 @@ public class KeyboardListener implements KeyboardHandler {
         //RESET PUNCH
         KeyboardEvent keyboardSpacebuttonRelease = new KeyboardEvent();
 
-        keyboardSpacebuttonRelease.setKey(KeyboardEvent.KEY_SPACE);
+        keyboardSpacebuttonRelease.setKey(KeyboardEvent.KEY_L);
 
         keyboardSpacebuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
 
@@ -136,6 +151,12 @@ public class KeyboardListener implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
+
+
+            // START GAME
+            case KeyboardEvent.KEY_SPACE:
+                game.start();
+                break;
 
 
             // LEFT FIGHTER
@@ -172,7 +193,7 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirectionsRightFighter(DirectionsRightFighter.UP);
                 break;
 
-            case KeyboardEvent.KEY_SPACE:
+            case KeyboardEvent.KEY_L:
                 if (game.isGameEnd()) {
                     break;
                 }
@@ -191,7 +212,7 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
 
-            case KeyboardEvent.KEY_SPACE:
+            case KeyboardEvent.KEY_L:
                 game.resetPunch2();
                 break;
         }

@@ -1,12 +1,16 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Grid.GridRing;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Screen.EndGame;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Utils.HealthBar;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.DirectionsRightFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
+
+import java.awt.*;
 
 public class Game {
 
@@ -28,12 +32,22 @@ public class Game {
 
     private boolean gameEnd;
 
+    private Picture backGround;
+
+    private boolean gameStart;
+
+    private EndGame endScreen;
+
     public Game() {
 
         //GRID
         ring = new GridRing(120, 60);
         ring.init();
 
+
+        //BACKGROUND
+        backGround = new Picture(10, 10, "Resources/StartScreen.png");
+        backGround.draw();
 
         //LEFT FIGHTER
         leftFighter = new LeftFighter(100, 30);
@@ -53,10 +67,21 @@ public class Game {
 
         leftHealthBar = new HealthBar(leftFighter.getHealth(), 30, 30);
         leftHealthBar.show();
+
+
         rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
         rightHealthBar.show();
 
         gameEnd = false;
+    }
+
+
+    public void start() {
+        gameStart = true;
+    }
+
+    public boolean getGameStart(){
+        return gameStart;
     }
 
 
@@ -182,7 +207,7 @@ public class Game {
         switch (directionsRightFighter) {
 
             case RIGHT:
-                if (rightFighter.getX() +220 >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OFF
+                if (rightFighter.getX() + 220 >= ring.getWidth()) { // BLOCKS THE PLAYER FROM GETTING OFF
                     return;
                 }
                 ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
@@ -302,6 +327,7 @@ public class Game {
             ((LeftFighter) leftFighter).getLeftFighterArm().delete();
             leftHealthBar.delete();
             rightHealthBar.delete();
+
 
             gameEnd = true;
         }
