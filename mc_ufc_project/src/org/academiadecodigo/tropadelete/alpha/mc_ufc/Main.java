@@ -1,7 +1,5 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Screen.StartGame;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.KeyboardListener;
@@ -11,6 +9,15 @@ public class Main {
 
 
         StartGame startScreen = new StartGame();
+
+
+        //Sound sound = new Sound(" ");
+
+        //sound.play(true);
+
+
+
+
 
 
 
@@ -26,6 +33,7 @@ public class Main {
 
         Picture controlsScreen = new Picture(10, 10,"Resources/control-screen.png");
 
+        //sound.stop();
 
         controlsScreen.draw();
         startScreen.delete();
