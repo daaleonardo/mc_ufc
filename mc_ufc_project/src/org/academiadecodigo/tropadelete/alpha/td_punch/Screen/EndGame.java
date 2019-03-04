@@ -54,7 +54,7 @@ public class EndGame {
         blueWinnerPos1 = new Picture(445, 80, "Resources/fighters/blue-winner-pos-1.png");
         blueWinnerPos2 = new Picture(445, 80, "Resources/fighters/blue-winner-pos-2.png");
         blueWins = new Picture(70, 160, "Resources/fighters/latino-wins.png");
-        blueWins2 = new Picture(800, 160, "Resources/fighters/latino-wins.png");
+        blueWins2 = new Picture(800, 16d0, "Resources/fighters/latino-wins.png");
 
         try {
             while (true) {

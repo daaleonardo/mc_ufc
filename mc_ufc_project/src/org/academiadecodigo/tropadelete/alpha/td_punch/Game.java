@@ -175,8 +175,6 @@ public class Game {
                 sound[0].play(true);
                 sound[1].play(true);
                 leftFighter.hit(rightFighter);
-                System.out.println("Right Fighter health is: " + rightFighter.getHealth());
-                System.out.println("Is Right Fighter dead? " + rightFighter.isDead());
             }
 
             ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, 0);
@@ -193,8 +191,6 @@ public class Game {
             sound[0].play(true);
             sound[1].play(true);
             leftFighter.hit(rightFighter);
-            System.out.println("Right Fighter health is: " + rightFighter.getHealth());
-            System.out.println("Is right Fighter dead? " + rightFighter.isDead());
             ((RightFighter) rightFighter).getBodyShapeClosed().translate(80, 0);
             ((RightFighter) rightFighter).getRightFighterArm().translate(80, 0);
             ((RightFighter) rightFighter).getBodyShapeOpen().translate(80, 0);
@@ -294,8 +290,6 @@ public class Game {
 
         ((RightFighter) rightFighter).punch();
 
-        System.out.println(" Left Fighter Position: " + leftFighter.getX() + ". Right Fighter Position " + rightFighter.getX());
-
         if (!collisionDetector.rightPunch()) {
             sound[2].play(true);
         }
@@ -304,8 +298,6 @@ public class Game {
                 sound[0].play(true);
                 sound[1].play(true);
                 rightFighter.hit(leftFighter);
-                System.out.println("Left Fighter health is: " + leftFighter.getHealth());
-                System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
             }
 
             ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, 0);
@@ -323,8 +315,6 @@ public class Game {
             sound[0].play(true);
             sound[1].play(true);
             rightFighter.hit(leftFighter);
-            System.out.println("Left Fighter health is: " + leftFighter.getHealth());
-            System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
             ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-80, 0);
             ((LeftFighter) leftFighter).getLeftFighterArm().translate(-80, 0);
             ((LeftFighter) leftFighter).getBodyShapeOpen().translate(-80, 0);
