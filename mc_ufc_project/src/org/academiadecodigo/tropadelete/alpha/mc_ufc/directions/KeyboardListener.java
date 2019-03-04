@@ -15,7 +15,6 @@ public class KeyboardListener implements KeyboardHandler {
     private Game game;
 
 
-
     public KeyboardListener(Game game) {
 
         this.game = game;
@@ -80,16 +79,6 @@ public class KeyboardListener implements KeyboardHandler {
 
         keyboard.addEventListener(keyboardRbuttonRelease);
 
-
-        //MOVE UP
-        KeyboardEvent keyboardWArrowPress = new KeyboardEvent();
-
-        keyboardWArrowPress.setKey(KeyboardEvent.KEY_W);
-
-        keyboardWArrowPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        keyboard.addEventListener(keyboardWArrowPress);
-
         /**
          * KEYS FOR
          * RIGHTFIGHTER
@@ -134,16 +123,6 @@ public class KeyboardListener implements KeyboardHandler {
 
         keyboard.addEventListener(keyboardSpacebuttonRelease);
 
-
-        //MOVE UP
-        KeyboardEvent keyboardUpArrowPress = new KeyboardEvent();
-
-        keyboardUpArrowPress.setKey(KeyboardEvent.KEY_UP);
-
-        keyboardUpArrowPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        keyboard.addEventListener(keyboardUpArrowPress);
-
     }
 
 
@@ -168,15 +147,11 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirections(Directions.RIGHT);
                 break;
 
-            case KeyboardEvent.KEY_W:
-                game.setDirections(Directions.UP);
-                break;
-
             case KeyboardEvent.KEY_R:
                 if (game.isGameEnd()) {
                     break;
                 }
-                game.punch();
+                game.setPunchLeftFighter(true);
                 break;
 
 
@@ -189,15 +164,11 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirectionsRightFighter(DirectionsRightFighter.RIGHT);
                 break;
 
-            case KeyboardEvent.KEY_UP:
-                game.setDirectionsRightFighter(DirectionsRightFighter.UP);
-                break;
-
             case KeyboardEvent.KEY_L:
                 if (game.isGameEnd()) {
                     break;
                 }
-                game.punch2();
+                game.setPunchRightFighter(true);
                 break;
         }
     }
@@ -208,12 +179,30 @@ public class KeyboardListener implements KeyboardHandler {
         switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_R:
-                game.resetPunch();
+                if (game.isGameEnd()) {
+                    game.deleteArm();
+                    return;
+                }
+                game.setPunchLeftFighter(false);
                 break;
 
 
             case KeyboardEvent.KEY_L:
-                game.resetPunch2();
+                if (game.isGameEnd()) {
+                    game.deleteArm2();
+                    return;
+                }
+                game.setPunchRightFighter(false);
+                break;
+
+            case KeyboardEvent.KEY_A:
+            case KeyboardEvent.KEY_D:
+                game.setDirections(Directions.NODIRECTION);
+                break;
+
+            case KeyboardEvent.KEY_LEFT:
+            case KeyboardEvent.KEY_RIGHT:
+                game.setDirectionsRightFighter(DirectionsRightFighter.NODIRECTION);
                 break;
         }
     }

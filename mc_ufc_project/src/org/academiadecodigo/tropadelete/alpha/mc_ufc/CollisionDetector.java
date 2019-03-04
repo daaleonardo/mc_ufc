@@ -15,7 +15,7 @@ public class CollisionDetector {
     }
 
     public boolean isUnsafe() {
-        return leftFighter.getX() + 290 == rightFighter.getX();
+        return leftFighter.getX() + 260 >= rightFighter.getX();
     }
 
     public boolean leftPunch() {

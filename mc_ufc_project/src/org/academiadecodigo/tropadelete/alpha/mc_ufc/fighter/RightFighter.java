@@ -14,16 +14,14 @@ public class RightFighter extends Fighter {
 
 
     public RightFighter(int health, int posX) {
-
         super(health, posX);
-
 
         bodyShapeClosed = new Picture(posX - 80, 131, "Resources/fighterRightClosed.png");
         bodyShapeOpen = new Picture(posX - 140, 131, "Resources/fighterRightOpen.png");
 
-        rightFighterArm = new Picture(getX() - 68, getY() + 61, "Resources/punch-right-1.png");
-        rightFighterArm_2 = new Picture(getX() - 150, getY() + 61, "Resources/punch-right-2.png");
-        rightFighterArm_3 = new Picture(getX() - 150, getY() + 61, "Resources/punch-right-3.png");
+        rightFighterArm = new Picture(getX() - 70, getY() + 61, "Resources/punch-right-1.png");
+        rightFighterArm_2 = new Picture(getX() - 90, getY() + 61, "Resources/punch-right-2.png");
+        rightFighterArm_3 = new Picture(getX() - 120, getY() + 61, "Resources/punch-right-3.png");
         rightFighterArm_4 = new Picture(getX() - 150, getY() + 61, "Resources/punch-right-4.png");
     }
 
@@ -32,10 +30,10 @@ public class RightFighter extends Fighter {
         try {
             rightFighterArm.delete();
             rightFighterArm_2.draw();
-            Thread.sleep(90);
+            Thread.sleep(50);
             rightFighterArm_2.delete();
             rightFighterArm_3.draw();
-            Thread.sleep(90);
+            Thread.sleep(50);
             rightFighterArm_3.delete();
             rightFighterArm_4.draw();
 
@@ -48,13 +46,20 @@ public class RightFighter extends Fighter {
     public void resetPunch() {
 
         try {
-            Thread.sleep(250);
+            Thread.sleep(60);
             rightFighterArm_4.delete();
             rightFighterArm.draw();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deletePunch() {
+        rightFighterArm.delete();
+        rightFighterArm_2.delete();
+        rightFighterArm_3.delete();
+        rightFighterArm_4.delete();
     }
 
     public void drawBodyClosed() {

@@ -10,7 +10,6 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.Fighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.LeftFighter;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.fighter.RightFighter;
 
-import java.awt.*;
 
 public class Game {
 
@@ -20,7 +19,7 @@ public class Game {
     private DirectionsRightFighter directionsRightFighter;
 
     private final int JUMP = 100;
-    private final int MOVEMENT = 10;
+    private final int MOVEMENT = 20;
 
     private Fighter leftFighter;
     private Fighter rightFighter;
@@ -38,6 +37,9 @@ public class Game {
 
     private EndGame endScreen;
 
+    private boolean punchLeftFighter;
+    private boolean punchRightFighter;
+
     public Game() {
 
         //GRID
@@ -50,7 +52,7 @@ public class Game {
         backGround.draw();
 
         //LEFT FIGHTER
-        leftFighter = new LeftFighter(100, 30);
+        leftFighter = new LeftFighter(100, 50);
         ((LeftFighter) leftFighter).drawBodyClosed();
         ((LeftFighter) leftFighter).drawArm();
 
@@ -73,6 +75,9 @@ public class Game {
         rightHealthBar.show();
 
         gameEnd = false;
+
+        punchLeftFighter = false;
+        punchRightFighter = false;
     }
 
 
@@ -80,7 +85,7 @@ public class Game {
         gameStart = true;
     }
 
-    public boolean getGameStart(){
+    public boolean getGameStart() {
         return gameStart;
     }
 
@@ -92,7 +97,7 @@ public class Game {
 
             case RIGHT:
                 if (collisionDetector.isUnsafe()) {
-                    if (rightFighter.getX() >= ring.getWidth() - 310) {
+                    if (rightFighter.getX() >= ring.getWidth() - 200) {
                         return;
                     }
                     ((RightFighter) rightFighter).getBodyShapeClosed().translate(MOVEMENT, 0);
@@ -104,10 +109,14 @@ public class Game {
                 }
                 try {
                     ((LeftFighter) leftFighter).deleteBodyClosed();
+                    ((LeftFighter) leftFighter).getLeftFighterArm().delete();
                     ((LeftFighter) leftFighter).drawBodyOpen();
-                    Thread.sleep(70);
+                    ((LeftFighter) leftFighter).getLeftFighterArm().draw();
+                    Thread.sleep(60);
                     ((LeftFighter) leftFighter).deleteBodyOpen();
+                    ((LeftFighter) leftFighter).getLeftFighterArm().delete();
                     ((LeftFighter) leftFighter).drawBodyClosed();
+                    ((LeftFighter) leftFighter).getLeftFighterArm().draw();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -122,7 +131,7 @@ public class Game {
                 break;
 
             case LEFT:
-                if (leftFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OF
+                if (leftFighter.getX() <= 130) { // BLOCKS THE PLAYER FROM GETTING OF
                     return;
                 }
 
@@ -133,20 +142,16 @@ public class Game {
                 ((LeftFighter) leftFighter).getLeftFighterArm_3().translate(-MOVEMENT, 0);
                 ((LeftFighter) leftFighter).getLeftFighterArm_4().translate(-MOVEMENT, 0);
                 break;
-
-            case UP:
-                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, -JUMP);
-                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, -JUMP);
-                try {
-                    Thread.sleep(JUMP);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                ((LeftFighter) leftFighter).getBodyShapeClosed().translate(0, JUMP);
-                ((LeftFighter) leftFighter).getLeftFighterArm().translate(0, JUMP);
         }
 
-        directions = Directions.NODIRECTION;
+    }
+
+    public void setPunchLeftFighter(boolean state) {
+        punchLeftFighter = state;
+    }
+
+    public boolean getPunchLeftFighter() {
+        return punchLeftFighter;
     }
 
 
@@ -194,6 +199,10 @@ public class Game {
         ((LeftFighter) leftFighter).resetPunch();
     }
 
+    public void deleteArm() {
+        ((LeftFighter) leftFighter).deletePunch();
+    }
+
 
     public void setDirections(Directions direction) {
 
@@ -220,7 +229,7 @@ public class Game {
 
             case LEFT:
                 if (collisionDetector.isUnsafe()) {
-                    if (leftFighter.getX() <= ring.PADDING) { // BLOCKS THE PLAYER FROM GETTING OFF
+                    if (leftFighter.getX() <= 130) { // BLOCKS THE PLAYER FROM GETTING OFF
                         return;
                     }
                     ((LeftFighter) leftFighter).getBodyShapeClosed().translate(-MOVEMENT, 0);
@@ -233,10 +242,14 @@ public class Game {
                 }
                 try {
                     ((RightFighter) rightFighter).deleteBodyClosed();
+                    ((RightFighter) rightFighter).getRightFighterArm().delete();
                     ((RightFighter) rightFighter).drawBodyOpen();
-                    Thread.sleep(70);
+                    ((RightFighter) rightFighter).getRightFighterArm().draw();
+                    Thread.sleep(60);
                     ((RightFighter) rightFighter).deleteBodyOpen();
+                    ((RightFighter) rightFighter).getRightFighterArm().delete();
                     ((RightFighter) rightFighter).drawBodyClosed();
+                    ((RightFighter) rightFighter).getRightFighterArm().draw();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -248,21 +261,17 @@ public class Game {
                 ((RightFighter) rightFighter).getRightFighterArm_3().translate(-MOVEMENT, 0);
                 ((RightFighter) rightFighter).getRightFighterArm_4().translate(-MOVEMENT, 0);
                 break;
-
-            case UP:
-                ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, -JUMP);
-                ((RightFighter) rightFighter).getRightFighterArm().translate(0, -JUMP);
-                try {
-                    Thread.sleep(JUMP);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                ((RightFighter) rightFighter).getBodyShapeClosed().translate(0, JUMP);
-                ((RightFighter) rightFighter).getRightFighterArm().translate(0, JUMP);
         }
 
-        directionsRightFighter = DirectionsRightFighter.NODIRECTION;
 
+    }
+
+    public void setPunchRightFighter(boolean state) {
+        punchRightFighter = state;
+    }
+
+    public boolean getPunchRighFighter() {
+        return punchRightFighter;
     }
 
     public void punch2() {
@@ -313,6 +322,10 @@ public class Game {
         ((RightFighter) rightFighter).resetPunch();
     }
 
+    public void deleteArm2() {
+        ((RightFighter) rightFighter).deletePunch();
+    }
+
     public void setDirectionsRightFighter(DirectionsRightFighter directionRightFighter) {
         this.directionsRightFighter = directionRightFighter;
     }
@@ -321,12 +334,17 @@ public class Game {
     public void endGame() {
         if (rightFighter.isDead() || leftFighter.isDead()) {
 
-            ((RightFighter) rightFighter).getBodyShapeClosed().delete();
-            ((LeftFighter) leftFighter).getBodyShapeClosed().delete();
-            ((RightFighter) rightFighter).getRightFighterArm().delete();
-            ((LeftFighter) leftFighter).getLeftFighterArm().delete();
-            leftHealthBar.delete();
-            rightHealthBar.delete();
+            try {
+                Thread.sleep(20);
+                ((RightFighter) rightFighter).getBodyShapeClosed().delete();
+                ((LeftFighter) leftFighter).getBodyShapeClosed().delete();
+                ((RightFighter) rightFighter).getRightFighterArm().delete();
+                ((LeftFighter) leftFighter).getLeftFighterArm().delete();
+                leftHealthBar.delete();
+                rightHealthBar.delete();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
 
             gameEnd = true;

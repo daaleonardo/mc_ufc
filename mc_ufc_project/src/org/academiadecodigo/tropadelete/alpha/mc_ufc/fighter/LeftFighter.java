@@ -30,10 +30,10 @@ public class LeftFighter extends Fighter {
         try {
             leftFighterArm.delete();
             leftFighterArm_2.draw();
-            Thread.sleep(90);
+            Thread.sleep(50);
             leftFighterArm_2.delete();
             leftFighterArm_3.draw();
-            Thread.sleep(90);
+            Thread.sleep(50);
             leftFighterArm_3.delete();
             leftFighterArm_4.draw();
 
@@ -46,13 +46,20 @@ public class LeftFighter extends Fighter {
     public void resetPunch() {
 
         try {
-            Thread.sleep(250);
+            Thread.sleep(60);
             leftFighterArm_4.delete();
             leftFighterArm.draw();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deletePunch(){
+        leftFighterArm.delete();
+        leftFighterArm_2.delete();
+        leftFighterArm_3.delete();
+        leftFighterArm_4.delete();
     }
 
     public void drawBodyClosed() {

@@ -16,11 +16,6 @@ public class Main {
         //sound.play(true);
 
 
-
-
-
-
-
         Game game = new Game();
 
         //listener is the object that enables input on keyboard
@@ -31,7 +26,7 @@ public class Main {
             startScreen.show();
         }
 
-        Picture controlsScreen = new Picture(10, 10,"Resources/control-screen.png");
+        Picture controlsScreen = new Picture(10, 10, "Resources/control-screen.png");
 
         //sound.stop();
 
@@ -39,7 +34,7 @@ public class Main {
         startScreen.delete();
 
         try {
-        Thread.sleep(4000);
+            Thread.sleep(4000);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -47,19 +42,25 @@ public class Main {
         controlsScreen.delete();
 
 
-
         while (true) {
 
 
             if (game.isGameEnd()) {
                 game.endGame();
-                return;
+                break;
             }
             try {
-                Thread.sleep(30);
                 game.move();
+                if (game.getPunchLeftFighter()) {
+                    game.punch();
+                    game.resetPunch();
+                }
                 Thread.sleep(30);
                 game.move2();
+                if (game.getPunchRighFighter()) {
+                    game.punch2();
+                    game.resetPunch2();
+                }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
