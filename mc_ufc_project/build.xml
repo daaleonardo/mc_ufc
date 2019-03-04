@@ -2,9 +2,9 @@
 <project name="MC UFC" default="jarfile">
 
     <target name="init" description="Initializes properties">
-        <property name="mc_ufc_project.name" value="MC UFC" />
+        <property name="td_punch.name" value="TD PUNCH" />
         <property name="src.dir" value="src" />
-        <property name="main.class" value="org.academiadecodigo.tropadelete.alpha.mc_ufc.Main" />
+        <property name="main.class" value="org.academiadecodigo.tropadelete.alpha.td_punch.Main" />
         <property name="build.dir" value="build" />
         <property name="lib.dir" value="lib" />
         <property name="classes.dir" value="${build.dir}/classes" />
@@ -25,7 +25,7 @@
     </target>
 
     <target name="jarfile" description="Archives the code" depends="compile">
-        <jar destfile="${build.dir}/${mc_ufc_project.name}.jar" basedir="${classes.dir}">
+        <jar destfile="${build.dir}/${td_punch.name}.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main.class}" />
                 <attribute name="Class-Path" value="${lib.dir} ${Resources.dir}" />
