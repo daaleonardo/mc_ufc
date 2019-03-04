@@ -57,7 +57,7 @@ public class Game {
         backGround.draw();
 
         //LEFT FIGHTER
-        leftFighter = new LeftFighter(100, 50);
+        leftFighter = new LeftFighter(100, 80);
         ((LeftFighter) leftFighter).drawBodyClosed();
         ((LeftFighter) leftFighter).drawArm();
 
@@ -164,9 +164,9 @@ public class Game {
 
 
         ((LeftFighter) leftFighter).punch();
-            if (!collisionDetector.leftPunch()) {
-                sound[2].play(true);
-            }
+        if (!collisionDetector.leftPunch()) {
+            sound[2].play(true);
+        }
 
         if (rightFighter.getX() + 200 >= ring.getWidth() - 50) {
 
@@ -286,7 +286,7 @@ public class Game {
         punchRightFighter = state;
     }
 
-    public boolean getPunchRighFighter() {
+    public boolean getPunchRightFighter() {
         return punchRightFighter;
     }
 
@@ -294,11 +294,12 @@ public class Game {
 
         ((RightFighter) rightFighter).punch();
 
+        System.out.println(" Left Fighter Position: " + leftFighter.getX() + ". Right Fighter Position " + rightFighter.getX());
 
-            if (!collisionDetector.rightPunch()) {
-                sound[2].play(true);
-            }
-        if (leftFighter.getX() - 20 <= ring.PADDING + 30) { // BLOCKS THE PLAYER FROM GETTING OFF
+        if (!collisionDetector.rightPunch()) {
+            sound[2].play(true);
+        }
+        if (leftFighter.getX() - 80 <= 80) { // BLOCKS THE PLAYER FROM GETTING OFF
             if (collisionDetector.rightPunch()) {
                 sound[0].play(true);
                 sound[1].play(true);
@@ -377,11 +378,11 @@ public class Game {
         return gameEnd;
     }
 
-    public boolean isLeftFighterDead(){
+    public boolean isLeftFighterDead() {
         return leftFighter.isDead();
     }
 
-    public boolean isRightFighterDead(){
+    public boolean isRightFighterDead() {
         return rightFighter.isDead();
     }
 

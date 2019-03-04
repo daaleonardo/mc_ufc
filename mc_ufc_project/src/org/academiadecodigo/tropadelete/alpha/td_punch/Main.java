@@ -65,7 +65,7 @@ public class Main {
                 }
                 Thread.sleep(30);
                 game.move2();
-                if (game.getPunchRighFighter()) {
+                if (game.getPunchRightFighter()) {
                     game.punch2();
                     game.resetPunch2();
                 }

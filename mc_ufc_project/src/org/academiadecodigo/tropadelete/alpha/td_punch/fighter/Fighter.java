@@ -35,8 +35,6 @@ public abstract class Fighter {
 
         randomDamage = (int) (Math.random() * DAMAGE + 15);
 
-        System.out.println(randomDamage );
-
         if (randomDamage >= health) {
             health = 0;
             dead = true;

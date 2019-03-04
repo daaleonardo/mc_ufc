@@ -19,8 +19,8 @@ public class EndGame {
     public void redNeck() {
         redWinnerPos1 = new Picture(445, 80, "Resources/fighters/red-winner-pos-1.png");
         redWinnerPos2 = new Picture(445, 80, "Resources/fighters/red-winner-pos-2.png");
-        redWins = new Picture(100, 40, "Resources/fighters/redneck-wins.png");
-        redWins2 = new Picture(790, 40, "Resources/fighters/redneck-wins.png");
+        redWins = new Picture(100, 160, "Resources/fighters/redneck-wins.png");
+        redWins2 = new Picture(790, 160, "Resources/fighters/redneck-wins.png");
 
         try {
             while (true) {
@@ -53,8 +53,8 @@ public class EndGame {
     public void latino() {
         blueWinnerPos1 = new Picture(445, 80, "Resources/fighters/blue-winner-pos-1.png");
         blueWinnerPos2 = new Picture(445, 80, "Resources/fighters/blue-winner-pos-2.png");
-        blueWins = new Picture(70, 40, "Resources/fighters/latino-wins.png");
-        blueWins2 = new Picture(800, 40, "Resources/fighters/latino-wins.png");
+        blueWins = new Picture(70, 160, "Resources/fighters/latino-wins.png");
+        blueWins2 = new Picture(800, 160, "Resources/fighters/latino-wins.png");
 
         try {
             while (true) {
