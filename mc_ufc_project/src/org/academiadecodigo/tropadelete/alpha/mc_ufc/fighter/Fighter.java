@@ -5,7 +5,7 @@ import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.Directions;
 public abstract class Fighter {
 
     private int health;
-    private final int DAMAGE = 30;
+    private final int DAMAGE = 15;
     private int randomDamage;
     private boolean dead;
     private Directions directions;
@@ -33,7 +33,9 @@ public abstract class Fighter {
 
     public void sufferDamage() {
 
-        randomDamage = (int) (Math.random() * DAMAGE);
+        randomDamage = (int) (Math.random() * DAMAGE + 15);
+
+        System.out.println(randomDamage );
 
         if (randomDamage >= health) {
             health = 0;

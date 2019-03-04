@@ -16,13 +16,13 @@ public class RightFighter extends Fighter {
     public RightFighter(int health, int posX) {
         super(health, posX);
 
-        bodyShapeClosed = new Picture(posX - 80, 131, "Resources/fighterRightClosed.png");
-        bodyShapeOpen = new Picture(posX - 140, 131, "Resources/fighterRightOpen.png");
+        bodyShapeClosed = new Picture(posX - 80, 131, "Resources/fighters/fighterRightClosed.png");
+        bodyShapeOpen = new Picture(posX - 140, 131, "Resources/fighters/fighterRightOpen.png");
 
-        rightFighterArm = new Picture(getX() - 70, getY() + 61, "Resources/punch-right-1.png");
-        rightFighterArm_2 = new Picture(getX() - 90, getY() + 61, "Resources/punch-right-2.png");
-        rightFighterArm_3 = new Picture(getX() - 120, getY() + 61, "Resources/punch-right-3.png");
-        rightFighterArm_4 = new Picture(getX() - 150, getY() + 61, "Resources/punch-right-4.png");
+        rightFighterArm = new Picture(getX() - 70, getY() + 61, "Resources/fighters/punch-right-1.png");
+        rightFighterArm_2 = new Picture(getX() - 90, getY() + 61, "Resources/fighters/punch-right-2.png");
+        rightFighterArm_3 = new Picture(getX() - 120, getY() + 61, "Resources/fighters/punch-right-3.png");
+        rightFighterArm_4 = new Picture(getX() - 150, getY() + 61, "Resources/fighters/punch-right-4.png");
     }
 
     public void punch() {

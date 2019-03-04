@@ -82,7 +82,7 @@ public class KeyboardListener implements KeyboardHandler {
         //PUNCH
         KeyboardEvent keyboardRbuttonPress = new KeyboardEvent();
 
-        keyboardRbuttonPress.setKey(KeyboardEvent.KEY_R);
+        keyboardRbuttonPress.setKey(KeyboardEvent.KEY_W);
 
         keyboardRbuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
@@ -92,7 +92,7 @@ public class KeyboardListener implements KeyboardHandler {
         //RESET PUNCH
         KeyboardEvent keyboardRbuttonRelease = new KeyboardEvent();
 
-        keyboardRbuttonRelease.setKey(KeyboardEvent.KEY_R);
+        keyboardRbuttonRelease.setKey(KeyboardEvent.KEY_W   );
 
         keyboardRbuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
 
@@ -146,7 +146,7 @@ public class KeyboardListener implements KeyboardHandler {
         //PUNCH
         KeyboardEvent keyboardSpacebuttonPress = new KeyboardEvent();
 
-        keyboardSpacebuttonPress.setKey(KeyboardEvent.KEY_L);
+        keyboardSpacebuttonPress.setKey(KeyboardEvent.KEY_UP);
 
         keyboardSpacebuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
@@ -156,7 +156,7 @@ public class KeyboardListener implements KeyboardHandler {
         //RESET PUNCH
         KeyboardEvent keyboardSpacebuttonRelease = new KeyboardEvent();
 
-        keyboardSpacebuttonRelease.setKey(KeyboardEvent.KEY_L);
+        keyboardSpacebuttonRelease.setKey(KeyboardEvent.KEY_UP);
 
         keyboardSpacebuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
 
@@ -186,7 +186,7 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirections(Directions.RIGHT);
                 break;
 
-            case KeyboardEvent.KEY_R:
+            case KeyboardEvent.KEY_W:
                 if (game.isGameEnd()) {
                     break;
                 }
@@ -203,7 +203,7 @@ public class KeyboardListener implements KeyboardHandler {
                 game.setDirectionsRightFighter(DirectionsRightFighter.RIGHT);
                 break;
 
-            case KeyboardEvent.KEY_L:
+            case KeyboardEvent.KEY_UP:
                 if (game.isGameEnd()) {
                     break;
                 }
@@ -217,7 +217,7 @@ public class KeyboardListener implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
 
-            case KeyboardEvent.KEY_R:
+            case KeyboardEvent.KEY_W:
                 if (game.isGameEnd()) {
                     game.deleteArm();
                     return;
@@ -226,7 +226,7 @@ public class KeyboardListener implements KeyboardHandler {
                 break;
 
 
-            case KeyboardEvent.KEY_L:
+            case KeyboardEvent.KEY_UP:
                 if (game.isGameEnd()) {
                     game.deleteArm2();
                     return;

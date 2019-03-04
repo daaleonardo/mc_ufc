@@ -9,7 +9,7 @@ public class StartGame {
 
     public StartGame() {
 
-        menu = new Picture(10,10,"Resources/press-space.png");
+        menu = new Picture(10,10,"Resources/screen/start-screen.png");
 
     }
 

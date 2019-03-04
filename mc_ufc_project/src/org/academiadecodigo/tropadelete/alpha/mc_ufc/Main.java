@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.alpha.mc_ufc;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.tropadelete.alpha.mc_ufc.Screen.EndGame;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.Screen.StartGame;
 import org.academiadecodigo.tropadelete.alpha.mc_ufc.directions.KeyboardListener;
 
@@ -9,8 +10,7 @@ public class Main {
 
         Sound sound = new Sound("/Resources/soundfx/boxing-ring-sound.wav");
         Sound sound1 = new Sound("/Resources/soundfx/burningHeart.wav");
-        Sound sound2 = new Sound("/Resources/soundfx/punch.wav");
-        Sound sound3 = new Sound("/Resources/soundfx/Woosh.wav");
+        Sound sound2 = new Sound("/Resources/soundfx/victory.wav");
 
 
         StartGame startScreen = new StartGame();
@@ -33,9 +33,8 @@ public class Main {
         }
 
 
-        Picture controlsScreen = new Picture(10, 10, "Resources/control-screen.png");
+        Picture controlsScreen = new Picture(10, 10, "Resources/screen/game-controls.png");
 
-        //sound.stop();
 
         controlsScreen.draw();
         startScreen.delete();
@@ -49,10 +48,10 @@ public class Main {
         controlsScreen.delete();
 
 
+        sound1.stop();
         sound.play(true);
         while (true) {
 
-            sound1.stop();
 
             if (game.isGameEnd()) {
                 game.endGame();
@@ -77,5 +76,16 @@ public class Main {
                 e.printStackTrace();
             }
         }
+
+        EndGame endGame = new EndGame();
+
+        sound2.play(true);
+
+        if (game.isRightFighterDead()) {
+            endGame.redNeck();
+            System.exit(0);
+        }
+        endGame.latino();
+        System.exit(0);
     }
 }

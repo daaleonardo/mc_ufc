@@ -53,7 +53,7 @@ public class Game {
 
 
         //BACKGROUND
-        backGround = new Picture(10, 10, "Resources/StartScreen.png");
+        backGround = new Picture(10, 10, "Resources/screen/ring.png");
         backGround.draw();
 
         //LEFT FIGHTER
@@ -168,7 +168,7 @@ public class Game {
                 sound[2].play(true);
             }
 
-        if (rightFighter.getX() + 200 >= ring.getWidth()) {
+        if (rightFighter.getX() + 200 >= ring.getWidth() - 50) {
 
 
             if (collisionDetector.leftPunch()) {
@@ -375,6 +375,14 @@ public class Game {
 
     public boolean isGameEnd() {
         return gameEnd;
+    }
+
+    public boolean isLeftFighterDead(){
+        return leftFighter.isDead();
+    }
+
+    public boolean isRightFighterDead(){
+        return rightFighter.isDead();
     }
 
 }
