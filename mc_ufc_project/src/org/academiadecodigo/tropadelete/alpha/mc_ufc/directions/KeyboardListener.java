@@ -49,6 +49,15 @@ public class KeyboardListener implements KeyboardHandler {
 
         keyboard.addEventListener(keyboardAbuttonPress);
 
+        //RESET LEFT
+        KeyboardEvent keyboardAbuttonRelease = new KeyboardEvent();
+
+        keyboardAbuttonRelease.setKey(KeyboardEvent.KEY_A);
+
+        keyboardAbuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardAbuttonRelease);
+
 
         //MOVE RIGHT
         KeyboardEvent keyboardDbuttonPress = new KeyboardEvent();
@@ -58,6 +67,16 @@ public class KeyboardListener implements KeyboardHandler {
         keyboardDbuttonPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         keyboard.addEventListener(keyboardDbuttonPress);
+
+
+        //RESET RIGHT
+        KeyboardEvent keyboardDbuttonRelease = new KeyboardEvent();
+
+        keyboardDbuttonRelease.setKey(KeyboardEvent.KEY_D);
+
+        keyboardDbuttonRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardDbuttonRelease);
 
 
         //PUNCH
@@ -94,6 +113,16 @@ public class KeyboardListener implements KeyboardHandler {
         keyboard.addEventListener(keyboardLeftArrow);
 
 
+        //RESET LEFT
+        KeyboardEvent keyboardLeftArrowRelease = new KeyboardEvent();
+
+        keyboardLeftArrowRelease.setKey(KeyboardEvent.KEY_LEFT);
+
+        keyboardLeftArrowRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardLeftArrowRelease);
+
+
         //MOVE RIGHT
         KeyboardEvent keyboardRightArrow = new KeyboardEvent();
 
@@ -102,6 +131,16 @@ public class KeyboardListener implements KeyboardHandler {
         keyboardRightArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         keyboard.addEventListener(keyboardRightArrow);
+
+
+        //RESET RIGHT
+        KeyboardEvent keyboardRightArrowRelease = new KeyboardEvent();
+
+        keyboardRightArrowRelease.setKey(KeyboardEvent.KEY_RIGHT);
+
+        keyboardRightArrowRelease.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        keyboard.addEventListener(keyboardRightArrowRelease);
 
 
         //PUNCH

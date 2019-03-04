@@ -39,8 +39,13 @@ public class Game {
 
     private boolean punchLeftFighter;
     private boolean punchRightFighter;
+    private Sound[] sound = {new Sound("/Resources/soundfx/punch.wav"),
+            new Sound("/Resources/soundfx/grunt.wav"),
+            new Sound("/Resources/soundfx/Woosh.wav")};
+
 
     public Game() {
+
 
         //GRID
         ring = new GridRing(120, 60);
@@ -156,11 +161,19 @@ public class Game {
 
 
     public void punch() {
+
+
         ((LeftFighter) leftFighter).punch();
+            if (!collisionDetector.leftPunch()) {
+                sound[2].play(true);
+            }
 
         if (rightFighter.getX() + 200 >= ring.getWidth()) {
 
+
             if (collisionDetector.leftPunch()) {
+                sound[0].play(true);
+                sound[1].play(true);
                 leftFighter.hit(rightFighter);
                 System.out.println("Right Fighter health is: " + rightFighter.getHealth());
                 System.out.println("Is Right Fighter dead? " + rightFighter.isDead());
@@ -177,6 +190,8 @@ public class Game {
             return;
         }
         if (collisionDetector.leftPunch()) {
+            sound[0].play(true);
+            sound[1].play(true);
             leftFighter.hit(rightFighter);
             System.out.println("Right Fighter health is: " + rightFighter.getHealth());
             System.out.println("Is right Fighter dead? " + rightFighter.isDead());
@@ -187,6 +202,7 @@ public class Game {
             ((RightFighter) rightFighter).getRightFighterArm_3().translate(80, 0);
             ((RightFighter) rightFighter).getRightFighterArm_4().translate(80, 0);
         }
+
         rightHealthBar.delete();
         rightHealthBar = new HealthBar(rightFighter.getHealth(), 1090, 30);
         rightHealthBar.show();
@@ -279,9 +295,13 @@ public class Game {
         ((RightFighter) rightFighter).punch();
 
 
+            if (!collisionDetector.rightPunch()) {
+                sound[2].play(true);
+            }
         if (leftFighter.getX() - 20 <= ring.PADDING + 30) { // BLOCKS THE PLAYER FROM GETTING OFF
-
             if (collisionDetector.rightPunch()) {
+                sound[0].play(true);
+                sound[1].play(true);
                 rightFighter.hit(leftFighter);
                 System.out.println("Left Fighter health is: " + leftFighter.getHealth());
                 System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
@@ -299,6 +319,8 @@ public class Game {
             return;
         }
         if (collisionDetector.rightPunch()) {
+            sound[0].play(true);
+            sound[1].play(true);
             rightFighter.hit(leftFighter);
             System.out.println("Left Fighter health is: " + leftFighter.getHealth());
             System.out.println("Is Left Fighter dead? " + leftFighter.isDead());
